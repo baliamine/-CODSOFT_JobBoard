@@ -1,16 +1,33 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const Routes = require("./routes/JobBoard_routes");
+
+// routes exportation
+const OfferJob_route = require("./routes/OfferJob");
+const JobSeeker_route = require("./routes/JobSeeker");
+const Employer_route = require("./routes/Employer");
+const Candidature_route = require("./routes/Candidature");
+
+
+// db 
 const mongoose = require("mongoose");
-const JobBoard_models = require("./models/JobBoard_models");
+
+// model exportation 
+const OfferJob_model = require("./models/OfferJob");
+const JobSeeker_model= require("./models/JobSeeker");
+const Employer_model = require("./models/Employer");
+const Candidature_model = require("./models/Candidature");
 
 // middleware
 app.use(express.json());
+
+
+
 // routes
-
-
-app.use("/API/offer",Routes);
+app.use("/API/offer",OfferJob_route);
+app.use("/API/jobseeker",JobSeeker_route);
+app.use("/API/Employer",Employer_route);
+app.use("/API/candidature",Candidature_route);
 
 // conect to db
 mongoose

@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const offerJob = require("../models/JobBoard_models");
+const offerJob = require("../models/OfferJob");
 const {
   NewofferJob,
   AllofferJobs,
   SingleofferJob,
   deleteOfferJob,
   updateOfferJob,
-} = require("../controllers/JobBoard_controller");
+} = require("../controllers/OfferJob");
 
 router.get("/all-offer", AllofferJobs);
 

@@ -1,4 +1,4 @@
-const offerJob = require("../models/JobBoard_models");
+const offerJob = require("../models/OfferJob");
 const mongoose = require("mongoose");
 
 // get all offer jobs
@@ -79,7 +79,7 @@ const updateOfferJob = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)){
     return res.status(400).json({ error: "Invalid ID format" });
   }
-  const updatedofferJob = await offerJob.findOneAndUpdate({_id: id},{...req.body});
+  const updatedofferJob = await offerJob.findOneAndUpdate({_id: id},{...req.body},{new: true});
 
   if (!updatedofferJob) {
     return res.status(404).json({ message: "Offer job not found" });
