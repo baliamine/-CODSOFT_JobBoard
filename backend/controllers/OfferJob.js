@@ -2,13 +2,13 @@ const offerJob = require("../models/OfferJob");
 const mongoose = require("mongoose");
 
 // get all offer jobs
-const AllofferJobs = async (req, res) => {
+const getAllOffers = async (req, res) => {
   const OfferJobs = await offerJob.find({}).sort({ createdAt: -1 });
   res.status(200).json(OfferJobs);
 };
 
 //  get a single offer job
-const SingleofferJob = async (req, res) => {
+const getOfferById = async (req, res) => {
   const { id } = req.params;
 
   // Validate the ObjectId format before querying
@@ -31,28 +31,27 @@ const SingleofferJob = async (req, res) => {
 };
 
 // create a new offer job
-const NewofferJob = async (req, res) => {
+const addOffer = async (req, res) => {
   const {
-    idOffre,
-    titre,
+    title,
     description,
-    lieu,
-    salaire,
-    exgiences,
-    entreprise,
-    datePublication,
+    location,
+    salary,
+    requirements,
+    company,
+    publicationDate,
   } = req.body;
   try {
     const OfferJob = await offerJob.create({
-      idOffre,
-      titre,
+      title,
       description,
-      lieu,
-      salaire,
-      exgiences,
-      entreprise,
-      datePublication,
+      location,
+      salary,
+      requirements,
+      company,
+      publicationDate,
     });
+  
     res.status(200).json(OfferJob);
   } catch (error) {
     res.status(300).json({ message: error.message });
@@ -60,7 +59,7 @@ const NewofferJob = async (req, res) => {
 };
 
 // delete a offer job
-const deleteOfferJob = async (req, res) => {
+const deleteOffer= async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID format" });
@@ -74,7 +73,7 @@ const deleteOfferJob = async (req, res) => {
   res.status(200).json({ message: "Offer job deleted successfully" });
 };
 // update a offer job
-const updateOfferJob = async (req, res) => {
+const updateOffer = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)){
     return res.status(400).json({ error: "Invalid ID format" });
@@ -87,4 +86,4 @@ const updateOfferJob = async (req, res) => {
   res.status(200).json(updatedofferJob);
 };
 
-module.exports = { NewofferJob, AllofferJobs, SingleofferJob, deleteOfferJob,updateOfferJob };
+module.exports = { addOffer, getAllOffers, getOfferById, deleteOffer,updateOffer };

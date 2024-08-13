@@ -1,22 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const offerJob = require("../models/OfferJob");
-const {
-  NewofferJob,
-  AllofferJobs,
-  SingleofferJob,
-  deleteOfferJob,
-  updateOfferJob,
-} = require("../controllers/OfferJob");
+const{ addOffer, getAllOffers, getOfferById, deleteOffer,updateOffer }= require("../controllers/OfferJob");
 
-router.get("/all-offer", AllofferJobs);
+router.get("/all-offer", getAllOffers);
 
-router.get("/single-offer/:id", SingleofferJob);
+router.get("/single-offer/:id", getOfferById);
 
-router.post("/add-offer", NewofferJob);
+router.post("/add-offer",addOffer);
 
-router.delete("/delete-offer/:id", deleteOfferJob);
+router.delete("/delete-offer/:id", deleteOffer);
 
-router.patch("update-offer/:id", updateOfferJob);
+router.patch("update-offer/:id", updateOffer);
 
 module.exports = router;

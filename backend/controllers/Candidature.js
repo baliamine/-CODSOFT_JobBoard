@@ -2,7 +2,7 @@ const Candidature = require("../models/Candidature");
 const mongoose = require("mongoose");
 
 // Get all candidatures
-const allCandidatures = async (req, res) => {
+const getAllCandidatures = async (req, res) => {
   try {
     const candidatures = await Candidature.find({}).sort({ applicationDate: -1 });
     res.status(200).json(candidatures);
@@ -12,7 +12,7 @@ const allCandidatures = async (req, res) => {
 };
 
 // Get a single candidature
-const singleCandidature = async (req, res) => {
+const getCandidatureById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -20,7 +20,7 @@ const singleCandidature = async (req, res) => {
   }
 
   try {
-    const candidature = await Candidature.findById(id).populate('jobOffer').populate('jobSeeker');
+    const candidature = await Candidature.findById(id);
 
     if (!candidature) {
       return res.status(404).json({ error: "No such candidature!" });
@@ -33,12 +33,11 @@ const singleCandidature = async (req, res) => {
 };
 
 // Create a new candidature
-const newCandidature = async (req, res) => {
-  const { applicationId, jobOffer, jobSeeker, applicationDate, status } = req.body;
+const addCandidature = async (req, res) => {
+  const { jobOffer, jobSeeker, applicationDate, status } = req.body;
 
   try {
     const candidature = await Candidature.create({
-      applicationId,
       jobOffer,
       jobSeeker,
       applicationDate,
@@ -94,4 +93,4 @@ const updateCandidature = async (req, res) => {
   }
 };
 
-module.exports = { newCandidature, allCandidatures, singleCandidature, deleteCandidature, updateCandidature };
+module.exports = { addCandidature, getAllCandidatures, getCandidatureById, deleteCandidature, updateCandidature };

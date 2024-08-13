@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const {
-  newCandidature,
-  allCandidatures,
-  singleCandidature,
+  addCandidature,
+  getAllCandidatures,
+  getCandidatureById,
   deleteCandidature,
   updateCandidature,
 } = require("../controllers/Candidature");
 
 // Get all candidatures
-router.get("/all-candidatures", allCandidatures);
+router.get("/all-candidatures", getAllCandidatures);
 
 // Get a single candidature by ID
-router.get("/single-candidature/:id", singleCandidature);
+router.get("/single-candidature/:id",  getCandidatureById);
 
 // Add a new candidature
-router.post("/add-candidature", newCandidature);
+router.post("/add-candidature",addCandidature);
 
 // Delete a candidature by ID
 router.delete("/delete-candidature/:id", deleteCandidature);

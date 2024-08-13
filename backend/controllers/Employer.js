@@ -2,7 +2,7 @@ const Employer = require("../models/Employer");
 const mongoose = require("mongoose");
 
 // Get all employers
-const allEmployers = async (req, res) => {
+const getAllEmployers = async (req, res) => {
   try {
     const employers = await Employer.find({}).sort({ createdAt: -1 });
     res.status(200).json(employers);
@@ -12,7 +12,7 @@ const allEmployers = async (req, res) => {
 };
 
 // Get a single employer
-const singleEmployer = async (req, res) => {
+const getEmployerById = async (req, res) => {
   const { id } = req.params;
 
   // Validate the ObjectId format before querying
@@ -35,15 +35,15 @@ const singleEmployer = async (req, res) => {
 };
 
 // Create a new employer
-const newEmployer = async (req, res) => {
-  const { name, email, password, company } = req.body;
+const addEmployer = async (req, res) => {
+  const { name, email, password, companyName } = req.body;
 
   try {
     const employer = await Employer.create({
       name,
       email,
       password,
-      company,
+      companyName ,
     });
     res.status(201).json(employer);
   } catch (error) {
@@ -95,4 +95,4 @@ const updateEmployer = async (req, res) => {
   }
 };
 
-module.exports = { newEmployer, allEmployers, singleEmployer, deleteEmployer, updateEmployer };
+module.exports = { addEmployer, getAllEmployers, getEmployerById, deleteEmployer, updateEmployer };

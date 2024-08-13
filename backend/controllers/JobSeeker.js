@@ -2,13 +2,13 @@ const JobSeeker = require("../models/JobSeeker");
 const mongoose = require("mongoose");
 
 // Get all job seekers
-const allJobSeekers = async (req, res) => {
+const getAllJobSeekers = async (req, res) => {
   const jobSeekers = await JobSeeker.find({}).sort({ createdAt: -1 });
   res.status(200).json(jobSeekers);
 };
 
 // Get a single job seeker
-const singleJobSeeker = async (req, res) => {
+const getJobSeekerById = async (req, res) => {
   const { id } = req.params;
 
   // Validate the ObjectId format before querying
@@ -31,7 +31,7 @@ const singleJobSeeker = async (req, res) => {
 };
 
 // Create a new job seeker
-const newJobSeeker = async (req, res) => {
+const addJobSeeker = async (req, res) => {
   const { name, email, password, cv } = req.body;
 
   try {
@@ -77,4 +77,4 @@ const updateJobSeeker = async (req, res) => {
   res.status(200).json(updatedJobSeeker);
 };
 
-module.exports = { newJobSeeker, allJobSeekers, singleJobSeeker, deleteJobSeeker, updateJobSeeker };
+module.exports = { addJobSeeker, getAllJobSeekers, getJobSeekerById, deleteJobSeeker, updateJobSeeker };
