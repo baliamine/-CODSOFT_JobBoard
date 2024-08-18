@@ -1,13 +1,200 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* layout */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+}
 body {
+  background: #f1f1f1;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins";
+}
+header {
+  background: #fff;
+}
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header a {
+  color: #333;
+  text-decoration: none;
+}
+.pages{
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+.offer-details {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.offer-header {
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
+
+.offer-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.offer-company,
+.offer-location,
+.offer-publication-date {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.offer-body {
+  margin-bottom: 20px;
+}
+
+.offer-description {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.offer-requirements-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.offer-requirements {
+  font-size: 16px;
+  color: #333;
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.offer-requirements li {
+  margin-bottom: 5px;
+}
+
+.offer-salary {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.offer-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.apply-button,
+.contact-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.apply-button {
+  background-color: #0073b1; /* LinkedIn blue */
+  color: #fff;
+}
+
+.contact-button {
+  background-color: #f5f5f5; /* Light grey */
+  color: #0073b1; /* LinkedIn blue */
+  border: 1px solid #0073b1; /* LinkedIn blue border */
+}
+
+
+
+.home{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+/* add-offer */
+/* Container for the form */
+.add_offer {
+  width: 20%;
+  padding: 20px;
+  height: 60%;
+  border:1px solid #3333334f;
+
+}
+
+/* Header styling */
+.add_offer h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Label styling */
+.add_offer label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Input field styling */
+.add_offer input[type="text"],
+.add_offer input[type="number"],
+.add_offer input[type="date"] {
+  /* width: 100%; */
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Button styling */
+.add_offer button[type="submit"] {
+  display: block;
+  padding: 10px;
+  background-color: #0073b1; /* LinkedIn's primary blue color */
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-left: 30%;
+}
+
+.add_offer button[type="submit"]:hover {
+  background-color: #005582; /* Darker blue on hover */
+}
+
+/* Error message styling */
+.add_offer .error {
+  margin-top: 10px;
+  color: #d9534f; /* Bootstrap's error red */
+  font-size: 14px;
+}
+
+
+
+
+/* input error */

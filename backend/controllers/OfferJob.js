@@ -41,6 +41,36 @@ const addOffer = async (req, res) => {
     company,
     publicationDate,
   } = req.body;
+
+  const emptyInput = [];
+
+  if (!title) {
+    emptyInput.push("Title is required.");
+  }
+  if (!description) {
+    emptyInput.push("Description is required.");
+  }
+  if (!location) {
+    emptyInput.push("Location is required.");
+  }
+  if (!salary) {
+    emptyInput.push("Salary is required.");
+  }
+  if (!requirements) {
+    emptyInput.push("Requirements are required.");
+  }
+  if (!company) {
+    emptyInput.push("Company Name is required.");
+  }
+  if (!publicationDate) {
+    emptyInput.push("Publication Date is required.");
+  }
+
+  if (emptyInput.length > 0) {
+    // Combine all error messages into a single string or handle them as needed
+ return res.status(404).json({error: 'Please fill in the all fields',emptyInput})
+  }
+
   try {
     const OfferJob = await offerJob.create({
       title,
@@ -51,21 +81,21 @@ const addOffer = async (req, res) => {
       company,
       publicationDate,
     });
-  
+
     res.status(200).json(OfferJob);
   } catch (error) {
-    res.status(300).json({ message: error.message });
+    res.status(300).json({ error: error.message });
   }
 };
 
 // delete a offer job
-const deleteOffer= async (req, res) => {
+const deleteOffer = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID format" });
   }
 
-  const deletedOfferJob = await offerJob.findOneAndDelete(id);
+  const deletedOfferJob = await offerJob.findByIdAndDelete(id);
 
   if (!deletedOfferJob) {
     return res.status(404).json({ message: "Offer job not found" });
@@ -75,10 +105,14 @@ const deleteOffer= async (req, res) => {
 // update a offer job
 const updateOffer = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)){
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID format" });
   }
-  const updatedofferJob = await offerJob.findOneAndUpdate({_id: id},{...req.body},{new: true});
+  const updatedofferJob = await offerJob.findOneAndUpdate(
+    { _id: id },
+    { ...req.body },
+    { new: true }
+  );
 
   if (!updatedofferJob) {
     return res.status(404).json({ message: "Offer job not found" });
@@ -86,4 +120,10 @@ const updateOffer = async (req, res) => {
   res.status(200).json(updatedofferJob);
 };
 
-module.exports = { addOffer, getAllOffers, getOfferById, deleteOffer,updateOffer };
+module.exports = {
+  addOffer,
+  getAllOffers,
+  getOfferById,
+  deleteOffer,
+  updateOffer,
+};
