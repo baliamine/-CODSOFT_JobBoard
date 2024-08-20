@@ -17,6 +17,14 @@ export const OfferReducer = (state, action) => {
       return {
         offers: state.offers.filter((offer) => offer._id !== action.payload._id),
       };
+
+      case "UPDATE_OFFER":
+        return {
+          offers: state.offers.map((offer) =>
+            offer._id === action.payload._id? action.payload : offer
+          ),
+        };
+
     default:
       return state;
   }

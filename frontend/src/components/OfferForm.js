@@ -1,130 +1,181 @@
 import { useState } from "react";
 import UseOfferContext from "../hooks/UseOfferContext";
 
-// Define the OfferForm functional component
-const OfferForm = () => {
-  // Use the context to access the dispatch function for updating state
+const OfferForm = ({data,onClose}) => {
   const { dispatch } = UseOfferContext();
-  
-  // Declare state variables for form fields and their corresponding setter functions
-  const [title, setTitle] = useState(""); // title of the job offer
-  const [company, setCompany] = useState(""); // name of the company offering the job
-  const [location, setLocation] = useState(""); // location of the job
-  const [publicationDate, setPublicationDate] = useState(""); // date when the job offer was published
-  const [salary, setSalary] = useState(""); // salary offered for the job
-  const [requirements, setRequirements] = useState(""); // job requirements or qualifications needed
-  const [description, setDescription] = useState(""); // description of the job role
-  const [error, setError] = useState(null); // state variable to store any error messages
-  const[emptyInput, setEmptyInput] = useState([]);
+  console.log("data", data);
+  const [dataOffer, setDataOffer] = useState({
+    // : maanitha sin
+    // ya fergha ya fiha title
+    title: data ? data.title : "",
+    company: data ? data.company : "",
+    location: data ? data.location : "",
+    publicationDate: data ? data.publicationDate : "",
+    salary: data ? data.salary : "",
+    requirements: data ? data.requirements : "",
+    description: data ? data.description : "",
+  });
+  const [errors, setErrors] = useState({});
 
-  // Define an asynchronous function that handles form validation and submission
-  const ValidateForm = async (e) => {
-    e.preventDefault(); //I want to handle this form submission myself; don't do it the default way
+  const validateDataOffer = (dataOffer) => {
+    const errors = {};
+    if (!dataOffer.title) {
+      errors.title = "Title is required";
+    }
+    if (!dataOffer.company) {
+      errors.company = "Company is required";
+    }
+    if (!dataOffer.location) {
+      errors.location = "Location is required";
+    }
+    if (!dataOffer.publicationDate) {
+      errors.publicationDate = "Publication Date is required";
+    }
+    if (!dataOffer.salary) {
+      errors.salary = "Salary is required";
+    }
+    if (!dataOffer.requirements) {
+      errors.requirements = "Requirements are required";
+    }
+    if (!dataOffer.description) {
+      errors.description = "Description is required";
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
-    // Create an object with the form data to send in the request body
-    const offer = {
-      title,
-      company,
-      location,
-      publicationDate,
-      salary,
-      requirements,
-      description,
-    };
+  const SubmitOffer = async (e) => {
+    e.preventDefault(); // Prevent default form submission
 
-    // Send a POST request to add the job offer to the backend
-    const response = await fetch("/API/offer/add-offer", {
-      method: "POST",
-      body: JSON.stringify(offer), // Convert the offer object to a JSON string
-      headers: {
-        "Content-Type": "application/json", // Inform the server that the request body is in JSON format
-      },
-    });
+    if (validateDataOffer(dataOffer)) {
+      try {
+        // fetch yaaml consomation api (i3yt lil api )
+        const endpoint = data
+          ? `/API/offer/update-offer/${data._id}`
+          : "/api/offer/add-offe";
+        const response = await fetch(endpoint, {
+          method: data ? "PATCH" : "POST",
+          body: JSON.stringify(dataOffer),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const json = await response.json();
+        // sabeb yimchi i9oulo hay il 9at3 jdida w y3lmo fil jdid kil store (rani 3mlt post or update or ..... howa sabeb ifay9 il store)
+        const ACTION = data ? "UPDATE_OFFER" : "ADD_OFFER";
 
-    const json = await response.json(); // Parse the response JSON
+        dispatch({ type: ACTION, payload: json });
+        data && json && onClose(); 
+        // Clear the form after submission
 
-    // If the response is not okay, update the error state
-    if (!response.ok) {
-      setError(json.error);
-      setEmptyInput(json.emptyInput);
-    } else {
-      // If the response is okay, reset the form fields and dispatch the new offer
-      setTitle("");
-      setCompany("");
-      setLocation("");
-      setPublicationDate("");
-      setSalary("");
-      setRequirements("");
-      setDescription("");
-      setError(null); // Reset the error state
-      setEmptyInput([]); // Reset the emptyInput state
-      dispatch({ type: "ADD_OFFER", payload: json }); // Update the offers in context
+        setDataOffer({
+          title: "",
+          company: "",
+          location: "",
+          publicationDate: "",
+          salary: "",
+          requirements: "",
+          description: "",
+        });
+      } catch (e) {
+        console.log("Error:", e);
+      }
     }
   };
 
-  // JSX to render the form
   return (
-    <form action="" className="add_offer" onSubmit={ValidateForm}>
+    <form className="add_offer" onSubmit={SubmitOffer}>
       <h3>Add Offer</h3>
 
       <label>Title:</label>
       <input
         type="text"
-        onChange={(e) => setTitle(e.target.value)} // Update title state when the user types
-        value={title} // Bind the input field to the title state variable
-        className={emptyInput.includes("title")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, title: e.target.value });
+          setErrors({ ...errors, title: "" });
+        }}
+        value={dataOffer.title}
+        className={errors.title ? "error" : ""}
       />
+      {errors.title && <div className="error">{errors.title}</div>}
 
       <label>Company:</label>
       <input
         type="text"
-        onChange={(e) => setCompany(e.target.value)} // Update company state
-        value={company} // Bind to company state variable
-        className={emptyInput.includes("company")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, company: e.target.value });
+          setErrors({ ...errors, company: "" });
+        }}
+        value={dataOffer.company}
+        className={errors.company ? "error" : ""}
       />
+      {errors.company && <div className="error">{errors.company}</div>}
 
       <label>Location:</label>
       <input
         type="text"
-        onChange={(e) => setLocation(e.target.value)} // Update location state
-        value={location} // Bind to location state variable
-        className={emptyInput.includes("location")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, location: e.target.value });
+          setErrors({ ...errors, location: "" });
+        }}
+        value={dataOffer.location}
+        className={errors.location ? "error" : ""}
       />
+      {errors.location && <div className="error">{errors.location}</div>}
 
       <label>Publication Date:</label>
       <input
         type="date"
-        onChange={(e) => setPublicationDate(e.target.value)} // Update publicationDate state
-        value={publicationDate} // Bind to publicationDate state variable
-        className={emptyInput.includes("publicationDate")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, publicationDate: e.target.value });
+          setErrors({ ...errors, publicationDate: "" });
+        }}
+        value={dataOffer.publicationDate}
+        className={errors.publicationDate ? "error" : ""}
       />
+      {errors.publicationDate && (
+        <div className="error">{errors.publicationDate}</div>
+      )}
 
       <label>Salary:</label>
       <input
         type="number"
-        onChange={(e) => setSalary(e.target.value)} // Update salary state
-        value={salary} // Bind to salary state variable
-        className={emptyInput.includes("salary")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, salary: e.target.value });
+          setErrors({ ...errors, salary: "" });
+        }}
+        value={dataOffer.salary}
+        className={errors.salary ? "error" : ""}
       />
+      {errors.salary && <div className="error">{errors.salary}</div>}
 
       <label>Requirements:</label>
       <input
         type="text"
-        onChange={(e) => setRequirements(e.target.value)} // Update requirements state
-        value={requirements} // Bind to requirements state variable
-        className={emptyInput.includes("requirements")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, requirements: e.target.value });
+          setErrors({ ...errors, requirements: "" });
+        }}
+        value={dataOffer.requirements}
+        className={errors.requirements ? "error" : ""}
       />
+      {errors.requirements && (
+        <div className="error">{errors.requirements}</div>
+      )}
 
       <label>Description:</label>
       <input
         type="text"
-        onChange={(e) => setDescription(e.target.value)} // Update description state
-        value={description} // Bind to description state variable
-        className={emptyInput.includes("description")? 'error' :''}
+        onChange={(e) => {
+          setDataOffer({ ...dataOffer, description: e.target.value });
+          setErrors({ ...errors, description: "" });
+        }}
+        value={dataOffer.description}
+        className={errors.description ? "error" : ""}
       />
+      {errors.description && <div className="error">{errors.description}</div>}
 
-      <button type="submit">Add Offer</button>
-      {error && <div className="error">Error: {error}</div>} {/* Display any error messages */}
+      <button type="submit">{data ? "Edit": "Add"}</button>
     </form>
   );
 };

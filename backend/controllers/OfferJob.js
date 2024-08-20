@@ -113,6 +113,7 @@ const updateOffer = async (req, res) => {
     { ...req.body },
     { new: true }
   );
+  console.log('req', req);
 
   if (!updatedofferJob) {
     return res.status(404).json({ message: "Offer job not found" });

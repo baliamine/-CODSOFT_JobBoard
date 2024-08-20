@@ -11,6 +11,6 @@ router.post("/add-offer",addOffer);
 
 router.delete("/delete-offer/:id", deleteOffer);
 
-router.patch("update-offer/:id", updateOffer);
+router.patch("/update-offer/:id", updateOffer);
 
 module.exports = router;
