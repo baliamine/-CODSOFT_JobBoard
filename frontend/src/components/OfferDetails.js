@@ -57,7 +57,7 @@ const OfferDetails = ({ offer }) => {
       </div>
 
       {popup && (
-        <div className="popup">
+        <div className="popup" id="popup_id"> 
           <OfferForm data={offer} className="offer-form-popup" onClose={() => setPopup(false)} />
           <button className="close-button" onClick={() => setPopup(false)}>X</button>
          
