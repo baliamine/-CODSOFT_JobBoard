@@ -85,7 +85,8 @@ const OfferForm = ({data,onClose}) => {
 
   return (
     <form className="add_offer" onSubmit={SubmitOffer}>
-      <h3>Add Offer</h3>
+     <h3>{data ? "Edit Offer" : "Add Offer"}</h3>
+
 
       <label>Title:</label>
       <input

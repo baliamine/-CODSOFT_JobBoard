@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import EmployerProfile from './pages/EmployerProfile'
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="employer-profile" element={<EmployerProfile />} />
           </Routes>
         </div>
       </BrowserRouter>

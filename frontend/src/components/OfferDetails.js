@@ -1,13 +1,16 @@
 import UseOfferContext from "../hooks/UseOfferContext";
 import { useState } from "react";
 import OfferForm from "./OfferForm";
+import { useNavigate } from "react-router-dom";
 
 const OfferDetails = ({ offer }) => {
   const { dispatch } = UseOfferContext();
   const [popup, setPopup] = useState(false);
-  console.log("popup", popup);
+  const navigate = useNavigate(); // Correct placement of useNavigate hook
 
-
+  const handleClick = () => {
+    navigate('/employer-profile'); 
+  };
 
   const handleDelete = async () => {
     try {
@@ -15,11 +18,7 @@ const OfferDetails = ({ offer }) => {
         method: "DELETE",
       });
       const data = await response.json();
-      console.log("data", data);
       if (data.message === "Offer job deleted successfully") {
-        console.log("hello");
-        // Dispatch the DELETE_OFFER action with the correct offer ID
-        // sabeb
         dispatch({ type: "DELETE_OFFER", payload: { _id: offer._id } });
       } else {
         console.error("Failed to delete offer:", data.message);
@@ -51,17 +50,17 @@ const OfferDetails = ({ offer }) => {
           <p className="offer-salary">Salary: {offer.salary}</p>
         </section>
         <footer className="offer-actions">
-          <div>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={() => setPopup(true)}>Edit</button>
-          </div>
+          <button onClick={handleDelete}>Delete</button>
+          <button onClick={() => setPopup(true)}>Edit</button>
+          <button onClick={handleClick}  >Check Employer</button>
         </footer>
       </div>
 
       {popup && (
         <div className="popup">
-          <OfferForm data={offer}  className="offer-form-popup"  onClose={()=>setPopup(false)}/>
-            <button className="close-button" onClick={() => setPopup(false)} >X</button>
+          <OfferForm data={offer} className="offer-form-popup" onClose={() => setPopup(false)} />
+          <button className="close-button" onClick={() => setPopup(false)}>X</button>
+         
         </div>
       )}
     </>

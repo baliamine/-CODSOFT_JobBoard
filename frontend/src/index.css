@@ -1,55 +1,22 @@
-/* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
-
-/* layout */
-:root {
-  --primary: #1aac83;
-  --error: #e7195a;
-}
-body {
-  background: #f1f1f1;
-  margin: 0;
-  font-family: "Poppins";
-}
-header {
-  background: #fff;
-}
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-header a {
-  color: #333;
-  text-decoration: none;
-}
-.pages{
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
-}
+/* Styling for offer details */
 .offer-details {
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
   margin: 20px auto;
+  max-width: 800px;
 }
 
 .offer-header {
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 1px solid #ddd;
   padding-bottom: 15px;
   margin-bottom: 15px;
 }
 
 .offer-title {
   font-size: 28px;
-  font-weight: bold;
   margin: 0;
 }
 
@@ -57,7 +24,7 @@ header a {
 .offer-location,
 .offer-publication-date {
   font-size: 16px;
-  color: #666;
+  color: #555;
   margin: 5px 0;
 }
 
@@ -66,78 +33,115 @@ header a {
 }
 
 .offer-description {
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
-  margin-bottom: 15px;
 }
 
 .offer-requirements-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin: 15px 0 10px;
 }
 
 .offer-requirements {
-  font-size: 16px;
-  color: #333;
   list-style-type: disc;
-  padding-left: 20px;
-  margin: 0;
-}
-
-.offer-requirements li {
-  margin-bottom: 5px;
+  margin-left: 20px;
 }
 
 .offer-salary {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 20px;
 }
 
 .offer-actions {
-  display: flex;
-  gap: 10px;
+  text-align: right;
 }
 
-.apply-button,
-.contact-button {
-  padding: 10px 20px;
-  font-size: 16px;
+.offer-actions button {
+  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
-.apply-button {
-  background-color: #0073b1; /* LinkedIn blue */
+.offer-actions button:first-child {
+  background-color: #d9534f; /* Bootstrap's danger red */
   color: #fff;
 }
 
-.contact-button {
-  background-color: #f5f5f5; /* Light grey */
-  color: #0073b1; /* LinkedIn blue */
-  border: 1px solid #0073b1; /* LinkedIn blue border */
+.offer-actions button:first-child:hover {
+  background-color: #c9302c; /* Darker red on hover */
 }
 
+.offer-actions button{
+  background-color: #0073b1; /* LinkedIn's primary blue */
+  color: #fff;
+}
 
+.offer-actions button:hover {
+  background-color: #005582; /* Darker blue on hover */
+}
 
-.home{
+/* Popup styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* add-offer */
+.offer-form-popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #d9534f; /* Bootstrap's danger red */
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: #c9302c; /* Darker red on hover */
+}
+
+
 /* Container for the form */
 .add_offer {
-  width: 20%;
+  width: 50%; /* Adjust width for better responsiveness */
+  max-width: 600px; /* Maximum width for large screens */
   padding: 20px;
-  height: 60%;
-  border:1px solid #3333334f;
-  
-
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #fff; /* White background */
+  margin: auto; /* Center the form horizontally */
+  position: relative; /* For positioning the button */
 }
 
 /* Header styling */
@@ -160,7 +164,7 @@ header a {
 .add_offer input[type="text"],
 .add_offer input[type="number"],
 .add_offer input[type="date"] {
-  /* width: 100%; */
+  width: calc(100% - 22px); /* Full width minus padding */
   padding: 10px;
   margin-bottom: 12px;
   border: 1px solid #ddd;
@@ -172,7 +176,8 @@ header a {
 /* Button styling */
 .add_offer button[type="submit"] {
   display: block;
-  padding: 10px;
+  width: 100%; /* Full width */
+  padding: 12px;
   background-color: #0073b1; /* LinkedIn's primary blue color */
   border: none;
   border-radius: 4px;
@@ -180,8 +185,7 @@ header a {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 10px;
-  margin-left: 30%;
+  margin-top: 20px; /* Top margin for spacing */
 }
 
 .add_offer button[type="submit"]:hover {
@@ -190,7 +194,7 @@ header a {
 
 /* Error message styling */
 .add_offer .error {
-  margin-top: 10px;
+  margin-top: 5px;
   color: #d9534f; /* Bootstrap's error red */
   font-size: 14px;
 }
@@ -198,24 +202,42 @@ header a {
 
 
 
-/* popup  */
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 25px;
-  border: 1px solid #ccc;
-  z-index: 1000;
+/* employer-profile-style */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
+.profile-header img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.profile-header h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #0073b1; /* LinkedIn blue */
+}
+
+.profile-details p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.profile-details strong {
+  color: #333;
+}
