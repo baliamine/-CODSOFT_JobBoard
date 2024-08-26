@@ -6,6 +6,7 @@ const {
   getEmployerById,
   deleteEmployer,
   updateEmployer,
+  getAllJobsByEmployer
 } = require("../controllers/Employer");
 
 // Get all employers
@@ -22,5 +23,9 @@ router.delete("/delete-employer/:id", deleteEmployer);
 
 // Update an employer by ID
 router.patch("/update-employer/:id", updateEmployer);
+
+
+// get by all jobs by employer 
+router.get("/all-jobs-byEmployer/:idEmployer", getAllJobsByEmployer);
 
 module.exports = router;

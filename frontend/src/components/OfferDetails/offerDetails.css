@@ -1,0 +1,218 @@
+/* Styling for offer details */
+
+
+
+
+.offer-details {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 80px;
+  }
+  
+  .offer-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .offer-title {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  .offer-company,
+  .offer-location,
+  .offer-publication-date {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  
+  
+  .offer-description {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .offer-requirements-title {
+    font-size: 18px;
+    margin: 15px 0 10px;
+  }
+  
+  .offer-requirements {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .offer-salary {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .offer-actions {
+    text-align: right;
+  }
+  
+  .offer-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  .offer-actions button:first-child {
+    background-color: #d9534f; /* Bootstrap's danger red */
+    color: #fff;
+  }
+  
+  .offer-actions button:first-child:hover {
+    background-color: #c9302c; /* Darker red on hover */
+  }
+  
+  .offer-actions button{
+    background-color: #0073b1; /* LinkedIn's primary blue */
+    color: #fff;
+  }
+  
+  .offer-actions button:hover {
+    background-color: #005582; /* Darker blue on hover */
+  }
+  
+  
+  
+  /* Popup styling */
+  .popup {
+    top: 0;
+    left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.5);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 1000;
+     position: fixed;
+   }
+   #popup_id{
+   
+     
+       overflow-y: auto; /* Adds scroll if content exceeds the height */
+   
+     
+   }
+
+
+   .offer-form-popup {
+     background: #fff;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     position: relative;
+     width: 100%;
+     max-width: 600px;
+   }
+   
+   .close-button {
+     position: absolute; 
+      top: 10px;
+     right: 10px;
+     background: #d9534f; /* Bootstrap's danger red */
+     border: none;
+     border-radius: 50%;
+     color: #fff;
+     font-size: 20px;
+     width: 30px;
+     height: 30px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+   }
+   
+   .close-button:hover {
+     background: #c9302c; /* Darker red on hover */
+   }
+   
+   
+   /* offer form  */
+   /* Container for the form */
+   .add_offer {
+     width: 30%; /* Adjust width for better responsiveness */
+     max-width: 450px; /* Maximum width for large screens */
+     padding: 20px;
+     border: 1px solid #ddd;
+     border-radius: 8px; /* Rounded corners */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+     background-color: #fff; /* White background */
+     margin-top: 79px;
+
+   
+   
+   }
+   
+   /* Header styling */
+   .add_offer h3 {
+     font-size: 24px;
+     margin-bottom: 20px;
+     color: #333;
+     text-align: center;
+   }
+   
+   /* Label styling */
+   .add_offer label {
+     display: block;
+     margin-bottom: 8px;
+     font-weight: 600;
+     color: #555;
+   }
+   
+   /* Input field styling */
+   .add_offer input[type="text"],
+   .add_offer input[type="number"],
+   .add_offer input[type="date"] {
+     width: calc(100% - 22px); /* Full width minus padding */
+     padding: 10px;
+     margin-bottom: 12px;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     font-size: 16px;
+     color: #333;
+   }
+   
+   /* Button styling */
+   .add_offer button[type="submit"] {
+     display: block;
+     width: 15%; /* Full width */
+     padding: 12px;
+     background-color: #0073b1; /* LinkedIn's primary blue color */
+     border: none;
+     border-radius: 4px;
+     color: #fff;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+     margin-top: 20px; /* Top margin for spacing */
+     margin-left: 165px;
+   }
+   
+   .add_offer button[type="submit"]:hover {
+     background-color: #005582; /* Darker blue on hover */
+   }
+   
+   /* Error message styling */
+   .add_offer .error {
+     margin-top: 5px;
+     color: #d9534f; /* Bootstrap's error red */
+     font-size: 14px;
+   }
+   
+  
+  

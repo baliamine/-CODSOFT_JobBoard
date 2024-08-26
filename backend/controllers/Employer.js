@@ -1,5 +1,6 @@
 const Employer = require("../models/Employer");
 const mongoose = require("mongoose");
+const OfferJob = require("../models/OfferJob");
 
 // Get all employers
 const getAllEmployers = async (req, res) => {
@@ -24,6 +25,7 @@ const getEmployerById = async (req, res) => {
     // Fetch the employer
     const employer = await Employer.findById(id);
 
+
     if (!employer) {
       return res.status(404).json({ error: "No such employer!" });
     }
@@ -36,14 +38,14 @@ const getEmployerById = async (req, res) => {
 
 // Create a new employer
 const addEmployer = async (req, res) => {
-  const { name, email, password, companyName,img } = req.body;
+  const { name, email, password, companyName, img } = req.body;
 
   try {
     const employer = await Employer.create({
       name,
       email,
       password,
-      companyName ,
+      companyName,
       img,
     });
     res.status(201).json(employer);
@@ -96,4 +98,31 @@ const updateEmployer = async (req, res) => {
   }
 };
 
-module.exports = { addEmployer, getAllEmployers, getEmployerById, deleteEmployer, updateEmployer };
+const getAllJobsByEmployer = async (req, res) => {
+  try {
+    const { idEmployer } = req.params;
+   
+
+    // Assuming you have a Job model and employerId is a field in the job documents
+    const jobs = await OfferJob.find({ idEmployer: idEmployer });
+    if (!jobs || jobs.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No jobs found for this employer." });
+    }
+
+    res.status(200).json(jobs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error, please try again later." });
+  }
+};
+
+module.exports = {
+  addEmployer,
+  getAllEmployers,
+  getEmployerById,
+  deleteEmployer,
+  updateEmployer,
+  getAllJobsByEmployer,
+};

@@ -5,6 +5,8 @@ const JobSeekerSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cv: { type: String },
+  candidatures: [{ type: Schema.Types.ObjectId, ref: 'Candidature' }] 
+
 });
 
 

@@ -7,6 +7,7 @@ const OfferJob_route = require("./routes/OfferJob");
 const JobSeeker_route = require("./routes/JobSeeker");
 const Employer_route = require("./routes/Employer");
 const Candidature_route = require("./routes/Candidature");
+const UserRoute= require("./routes/user");
 
 
 // db 
@@ -28,6 +29,7 @@ app.use("/API/offer",OfferJob_route);
 app.use("/API/jobseeker",JobSeeker_route);
 app.use("/API/Employer",Employer_route);
 app.use("/API/candidature",Candidature_route);
+app.use("/API/user",UserRoute);
 
 // conect to db
 mongoose

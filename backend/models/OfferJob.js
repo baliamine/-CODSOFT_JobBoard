@@ -8,6 +8,9 @@ const OfferJobSchema = new Schema({
   requirements: { type: String, required: true },
   company: { type: String, required: true },
   publicationDate: { type: String, required: true },
+  idEmployer: { type: Schema.Types.ObjectId, ref: 'Employer', required: true } ,
+  candidatures: [{ type: Schema.Types.ObjectId, ref: 'Candidature' }] 
+
 });
 
 module.exports = mongoose.model("OfferJob", OfferJobSchema);

@@ -40,6 +40,7 @@ const addOffer = async (req, res) => {
     requirements,
     company,
     publicationDate,
+    idEmployer
   } = req.body;
 
   const emptyInput = [];
@@ -80,6 +81,7 @@ const addOffer = async (req, res) => {
       requirements,
       company,
       publicationDate,
+      idEmployer
     });
 
     res.status(200).json(OfferJob);

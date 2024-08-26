@@ -1,7 +1,4 @@
-// OfferContext is created using createContext() and will be used to share data across components.
-// OfferReducer is a function that takes the current state and an action, and returns a new state based on the action type:
-// "SET_OFFER": Replaces the current offers with a new set of offers.
-// "ADD_OFFER": Adds a new offer to the existing list of offers.
+
 
 import { createContext, useReducer } from "react";
 
@@ -15,24 +12,28 @@ export const OfferReducer = (state, action) => {
       return { offers: [action.payload, ...state.offers] };
     case "DELETE_OFFER":
       return {
-        offers: state.offers.filter((offer) => offer._id !== action.payload._id),
+        offers: state.offers.filter(
+          (offer) => offer._id !== action.payload._id
+        ),
       };
 
-      case "UPDATE_OFFER":
-        return {
-          offers: state.offers.map((offer) =>
-            offer._id === action.payload._id? action.payload : offer
-          ),
-        };
+    case "UPDATE_OFFER":
+      return {
+        offers: state.offers.map((offer) =>
+          offer._id === action.payload._id ? action.payload : offer
+        ),
+      };
+     
 
     default:
       return state;
   }
 };
 
-
 export const OfferContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(OfferReducer, { offers: [] });
+  const [state, dispatch] = useReducer(OfferReducer, {
+    offers: []
+  });
 
   return (
     <OfferContext.Provider value={{ ...state, dispatch }}>
