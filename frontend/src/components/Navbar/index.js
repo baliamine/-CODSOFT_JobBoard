@@ -10,7 +10,7 @@ function Navbar() {
       </div>
       <ul className="navbar-content">
         <li>
-          <Link to="/profile" className="link">
+          <Link to="/employer-profile" className="link">
             My Profile
           </Link>
         </li>

@@ -38,7 +38,7 @@ const getEmployerById = async (req, res) => {
 
 // Create a new employer
 const addEmployer = async (req, res) => {
-  const { name, email, password, companyName, img } = req.body;
+  const { name, email, password, companyName, img ,bio} = req.body;
 
   try {
     const employer = await Employer.create({
@@ -47,6 +47,7 @@ const addEmployer = async (req, res) => {
       password,
       companyName,
       img,
+      bio,
     });
     res.status(201).json(employer);
   } catch (error) {

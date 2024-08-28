@@ -6,6 +6,9 @@ const EmployerSchema = new Schema({
   password: { type: String, required: true },
   companyName: { type: String, required: true } ,
   img:{ type: String, required: true},
+  bio: { type: String, required: true},
+
+
   // esm relation
   jobs: [{ type: Schema.Types.ObjectId, ref: 'OfferJob' }] 
 });

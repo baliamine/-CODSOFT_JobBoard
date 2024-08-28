@@ -1,0 +1,15 @@
+.Home {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Ensures both elements are aligned at the top */
+  padding: 20px;
+
+  margin-top: 100px;
+  padding-right: 50px;
+ 
+}
+
+.offer {
+    width: 600px;
+    margin-left:130px;
+}

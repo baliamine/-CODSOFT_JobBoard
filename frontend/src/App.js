@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import EmployerProfile from './pages/EmployerProfile'
+import Home from "./pages//Home/Home";
+import EmployerProfile from './pages/Employer-profile/EmployerProfile'
 
 
 
