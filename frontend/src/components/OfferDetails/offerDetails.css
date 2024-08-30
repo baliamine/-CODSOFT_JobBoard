@@ -183,8 +183,12 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px; /* Top margin for spacing */
-  margin-left: 165px;
+  margin-top: 20px; 
+
+}
+.submit-btn{
+  display: flex;
+  justify-content: center;
 }
 
 .add_offer button[type="submit"]:hover {

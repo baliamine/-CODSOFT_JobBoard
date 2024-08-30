@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages//Home/Home";
-import EmployerProfile from './pages/Employer-profile/EmployerProfile'
+import EmployerProfile from './pages/Employer-profile/EmployerProfile';
+import JobSeekerProfile from "./pages/JobSeeker-profile/JobSeekerProfile";
+import  JobSeekerHome from "./pages/homeJobSeeker/index";
 
 
 
@@ -12,6 +14,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/employer-profile" element={<EmployerProfile/>} /> 
+            <Route path="/JobSeeker-profile" element={<JobSeekerProfile/>} />
+            <Route path="/home-jobseeker" element={<JobSeekerHome/>} />
             
            
           </Routes>

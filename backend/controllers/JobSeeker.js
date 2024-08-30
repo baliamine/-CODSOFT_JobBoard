@@ -32,7 +32,18 @@ const getJobSeekerById = async (req, res) => {
 
 // Create a new job seeker
 const addJobSeeker = async (req, res) => {
-  const { name, email, password, cv } = req.body;
+  const {
+    name,
+    email,
+    password,
+    cv,
+    phone,
+    address,
+    skills,
+    education,
+    experience,
+    bio
+  } = req.body;
 
   try {
     const jobSeeker = await JobSeeker.create({
@@ -40,6 +51,12 @@ const addJobSeeker = async (req, res) => {
       email,
       password,
       cv,
+      phone,
+      address,
+      skills,
+      education,
+      experience,
+      bio,
     });
     res.status(200).json(jobSeeker);
   } catch (error) {
@@ -68,8 +85,11 @@ const updateJobSeeker = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID format" });
   }
-  
-  const updatedJobSeeker = await JobSeeker.findOneAndUpdate({ _id: id }, { ...req.body });
+
+  const updatedJobSeeker = await JobSeeker.findOneAndUpdate(
+    { _id: id },
+    { ...req.body }
+  );
 
   if (!updatedJobSeeker) {
     return res.status(404).json({ message: "Job seeker not found" });
@@ -77,4 +97,10 @@ const updateJobSeeker = async (req, res) => {
   res.status(200).json(updatedJobSeeker);
 };
 
-module.exports = { addJobSeeker, getAllJobSeekers, getJobSeekerById, deleteJobSeeker, updateJobSeeker };
+module.exports = {
+  addJobSeeker,
+  getAllJobSeekers,
+  getJobSeekerById,
+  deleteJobSeeker,
+  updateJobSeeker,
+};

@@ -5,7 +5,8 @@ import UseOfferContext from "../../hooks/UseOfferContext";
 
 const OfferForm = ({data,onClose}) => {
   const { dispatch: dispatchOffer } = UseOfferContext();
-  console.log("data", data);
+  const idEmployer = "66cb27361832cdc4bc0cef66";
+
   const [dataOffer, setDataOffer] = useState({
     // : maanitha sin
     // ya fergha ya fiha title
@@ -16,6 +17,7 @@ const OfferForm = ({data,onClose}) => {
     salary: data ? data.salary : "",
     requirements: data ? data.requirements : "",
     description: data ? data.description : "",
+    idEmployer:idEmployer,
   });
   const [errors, setErrors] = useState({});
 
@@ -54,7 +56,7 @@ const OfferForm = ({data,onClose}) => {
         // fetch yaaml consomation api (i3yt lil api )
         const endpoint = data
           ? `/API/offer/update-offer/${data._id}`
-          : "/API/offer/add-offer";
+          : "API/offer/add-offer";
         const response = await fetch(endpoint, {
           method: data ? "PATCH" : "POST",
           body: JSON.stringify(dataOffer),
@@ -177,8 +179,8 @@ const OfferForm = ({data,onClose}) => {
         className={errors.description ? "error" : ""}
       />
       {errors.description && <div className="error">{errors.description}</div>}
-
-      <button type="submit">{data ? "Edit": "Add"}</button>
+<div className="submit-btn">
+      <button type="submit">{data ? "Edit": "Add"}</button></div>
     </form>
   );
 };

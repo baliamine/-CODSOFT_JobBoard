@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import UseEmployerContext from "../../hooks/UseEmployerContext";
-import "./EmployerProfile.css";
+import "./Profile.css";
 import Navbar from "../../components/Navbar";
 import pen from "../../img/pen.png";
 import gps from "../../img/gps.png";
@@ -58,7 +58,8 @@ const EmployerProfile = () => {
     );
     const data = await response.json();
     if (response.ok) {
-      dispatch = { type: "UPDATE_EMPLOYER", Payload: data };
+      dispatch({ type: "UPDATE_EMPLOYER", payload: data }); // Correct usage of dispatch
+      setPopup(false); // Close the popup after successful update
     }
   };
 
@@ -66,7 +67,7 @@ const EmployerProfile = () => {
     <>
       <Navbar />
 
-      <div className="employer-profile">
+      <div className="container-profile">
         {/* Profile Header */}
 
         <div className="profile-header">
@@ -76,7 +77,7 @@ const EmployerProfile = () => {
             className="profile-logo"
           />
           <div className="profile-info">
-            <h1 className="employer-name">{employers?.name}</h1>
+            <h1 className="user-name">{employers?.name}</h1>
             <div>
               <p className="employer-company">{employers?.companyName}</p>
               <img className="gps" src={gps} alt="none" />
@@ -88,8 +89,8 @@ const EmployerProfile = () => {
           </button>
         </div>
         {/* About Me Section */}
-        <div className="profile-about">
-          <h2 className="about-me">About me</h2>
+        <div className="Profile">
+          <h2 className="section-title">About me</h2>
           <p className="about-me-content">{employers?.bio}</p>
         </div>
       </div>
