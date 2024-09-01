@@ -143,6 +143,7 @@ const EmployerProfile = () => {
                 <button type="button" onClick={() => setPopup(false)}>
                   Cancel
                 </button>
+                
               </div>
             </form>
           </div>

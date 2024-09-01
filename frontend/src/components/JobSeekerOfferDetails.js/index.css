@@ -1,83 +1,206 @@
 /* Styling for offer details */
 
 .offer-details {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: 80px;
-  }
-  
-  .offer-header {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .offer-title {
-    font-size: 28px;
-    margin: 0;
-  }
-  
-  .offer-company,
-  .offer-location,
-  .offer-publication-date {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
-  }
-  
-  .offer-description {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .offer-requirements-title {
-    font-size: 18px;
-    margin: 15px 0 10px;
-  }
-  
-  .offer-requirements {
-    list-style-type: disc;
-    margin-left: 20px;
-  }
-  
-  .offer-salary {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .offer-actions {
-    text-align: right;
-  }
-  
-  .offer-actions button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-  }
-  
-  .offer-actions button:first-child {
-    background-color: #d9534f; /* Bootstrap's danger red */
-    color: #fff;
-  }
-  
-  .offer-actions button:first-child:hover {
-    background-color: #c9302c; /* Darker red on hover */
-  }
-  
-  .offer-actions button {
-    background-color: #0073b1; /* LinkedIn's primary blue */
-    color: #fff;
-  }
-  
-  .offer-actions button:hover {
-    background-color: #005582; /* Darker blue on hover */
-  }
-  
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 80px;
+  transition: transform 0.3s ease-in-out;
+}
+.offer-details:hover{
+  transform: scale(1.05);
+}
+
+.offer-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.offer-title {
+  font-size: 28px;
+  margin: 0;
+  text-align: center;
+}
+
+.offer-company,
+.offer-location,
+.offer-publication-date {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.offer-description {
+  font-size: 16px;
+  color: #333;
+}
+
+.offer-requirements-title {
+  font-size: 18px;
+  margin: 15px 0 10px;
+}
+
+.offer-requirements {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.offer-salary {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.container-apply-btn {
+  text-align: right;
+}
+.container-apply-btn .delete-btn {
+  background-color: #d9534f; /* Bootstrap's danger red */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+
+}
+
+
+.container-apply-btn .delete-btn:hover {
+  background-color: #c9302c; /* Darker red on hover */
+}
+
+
+.apply-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  background-color: #0073b1; /* LinkedIn's primary blue */
+  color: #fff;
+}
+
+.apply-button:hover {
+  background-color: #005582; /* Darker blue on hover */
+}
+
+
+
+/* popup  */
+/* Popup Container */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+/* Popup Content */
+.popup-container {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Popup Header */
+.popup-container h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #333;
+  text-align: center;
+}
+
+/* Form Labels */
+.popup-container label {
+  display: block;
+  /* margin-bottom: 5px; */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Form Inputs */
+.popup-container input,
+.popup-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+/* Textarea Specific Styling */
+.popup-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Popup Actions */
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Buttons */
+.popup-actions button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popup-actions button:hover {
+  background: #0056b3;
+}
+
+/* Cancel Button */
+.popup-actions button[type="button"] {
+  background: #6c757d;
+}
+
+.popup-actions button[type="button"]:hover {
+  background: #5a6268;
+}
+
+.popup-container .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #d9534f;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+}
+
+.close-btn:hover {
+  background: #c9302c;
+}
