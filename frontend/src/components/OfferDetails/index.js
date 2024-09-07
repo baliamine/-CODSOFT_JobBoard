@@ -2,9 +2,12 @@ import UseOfferContext from "../../hooks/UseOfferContext";
 import { useState } from "react";
 import OfferForm from "../OfferForm/index";
 import "./offerDetails.css";
+import { useNavigate } from "react-router-dom";
 
 const OfferDetails = ({ offer }) => {
+  const idEmployer = offer.idEmployer;
   const { dispatch } = UseOfferContext();
+  const Navigate = useNavigate();
 
   const [popup, setPopup] = useState(false);
 
@@ -24,6 +27,9 @@ const OfferDetails = ({ offer }) => {
     }
   };
 
+  const handleNavigate = () => {
+    Navigate("/JobDetails", { state: { idEmployer, offer } });
+  };
   return (
     <>
       <div className="offer-details">
@@ -31,6 +37,8 @@ const OfferDetails = ({ offer }) => {
           <h1 className="offer-title">{offer.title}</h1>
           <p className="offer-company">{offer.company}</p>
           <p className="offer-location">{offer.location}</p>
+          <p className="offer-contact">{offer.candidatures}</p>
+         { console.log('offer.candidatures', offer.candidatures)}
           <p className="offer-publication-date">
             Posted on: {offer.publicationDate}
           </p>
@@ -44,11 +52,18 @@ const OfferDetails = ({ offer }) => {
                 .split(",")
                 .map((req, index) => <li key={index}>{req.trim()}</li>)}
           </ul>
-          <p className="offer-salary">Salary: {offer.salary}</p>
+          <p className="offer-salary">Salary: {offer.salary}dt</p>
         </section>
         <footer className="offer-actions">
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={() => setPopup(true)}>Edit</button>
+          <button onClick={() => setPopup(true)} className="edit-btn">
+            Edit
+          </button>
+          <button onClick={handleDelete} className="delete-btn">
+            Delete
+          </button>
+          <button onClick={handleNavigate} className="see-more-btn">
+            See more
+          </button>
         </footer>
       </div>
 

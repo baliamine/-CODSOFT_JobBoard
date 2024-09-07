@@ -34,14 +34,16 @@ const getCandidatureById = async (req, res) => {
 
 // Create a new candidature
 const addCandidature = async (req, res) => {
-  const { jobOffer, jobSeeker, applicationDate, status } = req.body;
+  const { offerJob, jobSeeker, applicationDate, status,motivationLetter, } = req.body;
+  console.log(req.body); // Log the request body
 
   try {
     const candidature = await Candidature.create({
-      jobOffer,
+      offerJob,
       jobSeeker,
       applicationDate,
       status,
+      motivationLetter, 
     });
     res.status(201).json(candidature);
   } catch (error) {

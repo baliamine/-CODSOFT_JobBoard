@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./JobSeekerOfferDetails.css";
 import UseCandidatureContext from "../../hooks/UseCandidatureContext";
+import { useNavigate } from "react-router-dom";
 
 const JobSeekerOfferDetails = ({ offer }) => {
   const jobSeekerId = "66d075786842d41103d96dd1";
+  const idEmployer = offer.idEmployer;
   const { dispatch } = UseCandidatureContext();
   const [popup, setPopup] = useState(false);
   const [jobSeekerData, setJobSeekerData] = useState(null);
-  const [submitted, setSubmitted] = useState(false) ;
+  const [submitted, setSubmitted] = useState(false);
+  const Navigate = useNavigate();
   const [candidature, setCandidature] = useState({
     jobSeeker: jobSeekerId,
     offerJob: offer._id,
@@ -18,13 +21,17 @@ const JobSeekerOfferDetails = ({ offer }) => {
   useEffect(() => {
     const fetchJobSeekerData = async () => {
       try {
-        const response = await fetch(`/API/jobseeker/single-jobseeker/${jobSeekerId}`);
+        const response = await fetch(
+          `/API/jobseeker/single-jobseeker/${jobSeekerId}`
+        );
         if (response.ok) {
           const data = await response.json();
           setJobSeekerData(data); // Store job seeker data in state
         } else {
           const errorData = await response.json();
-          console.error(`Failed to fetch job seeker data: ${errorData.message}`);
+          console.error(
+            `Failed to fetch job seeker data: ${errorData.message}`
+          );
         }
       } catch (error) {
         console.error("Error fetching job seeker data:", error);
@@ -69,13 +76,16 @@ const JobSeekerOfferDetails = ({ offer }) => {
     e.preventDefault(); // Prevent default form submission behavior
 
     try {
-      const response = await fetch(`/API/candidature/update-candidature/${candidature._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(candidature),
-      });
+      const response = await fetch(
+        `/API/candidature/update-candidature/${candidature._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(candidature),
+        }
+      );
 
       if (response.ok) {
         const updatedCandidature = await response.json();
@@ -102,15 +112,19 @@ const JobSeekerOfferDetails = ({ offer }) => {
     }));
   };
 
-
-
+  const handleNavigate = () => {
+    Navigate("/JobDetails", { state: { idEmployer, offer } });
+  };
 
   const deleteCandidature = async () => {
     try {
-      const response = await fetch(`/API/Candidature/delete-candidature/${candidature._id}`, {
-        method: "DELETE",
-      });
-      console.log('response', response)
+      const response = await fetch(
+        `/API/Candidature/delete-candidature/${candidature._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      console.log("response", response);
 
       if (response.ok) {
         dispatch({ type: "DELETE_CANDIDATURE", payload: candidature });
@@ -121,7 +135,6 @@ const JobSeekerOfferDetails = ({ offer }) => {
         });
         setSubmitted(false);
         setPopup(false);
-        
       } else {
         const errorData = await response.json();
         alert(`Failed to delete candidature: ${errorData.message}`);
@@ -152,14 +165,25 @@ const JobSeekerOfferDetails = ({ offer }) => {
                 .split(",")
                 .map((req, index) => <li key={index}>{req.trim()}</li>)}
           </ul>
-          <p className="offer-salary">Salary: {offer.salary}</p>
+          <p className="offer-salary">Salary: {offer.salary}dt</p>
         </section>
         <footer className="container-apply-btn">
           <button className="apply-button" onClick={() => setPopup(true)}>
             {submitted ? "Edit" : "Apply"}
-           
           </button>
-          <button onClick={deleteCandidature} className="delete-btn">Delete</button>
+
+          {submitted && (
+            <button onClick={deleteCandidature} className="delete-btn">
+              Remove{" "}
+            </button>
+          )}
+          <button
+            onClick={handleNavigate}
+            className="see-more-btn"
+            key={idEmployer}
+          >
+            See More
+          </button>
         </footer>
       </div>
 
@@ -174,11 +198,7 @@ const JobSeekerOfferDetails = ({ offer }) => {
             </button>
             <form onSubmit={submitted ? EditCandidature : handleApply}>
               <label>Name:</label>
-              <input
-                type="text"
-                value={jobSeekerData?.name || ""}
-                readOnly
-              />
+              <input type="text" value={jobSeekerData?.name || ""} readOnly />
 
               <label>Email:</label>
               <input

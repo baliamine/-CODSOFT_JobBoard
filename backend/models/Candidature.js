@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const CandidatureSchema = new Schema({
   offerJob: {
     type:Schema.Types.ObjectId,
-    ref: "offerJob",
+    ref: "OfferJob",
     required: true,
   },
   jobSeeker: {
@@ -11,8 +11,9 @@ const CandidatureSchema = new Schema({
     ref: "JobSeeker",
     required: true,
   },
-  applicationDate: { type: String, required: true },
-  status: { type: String, required: true },
+  applicationDate: { type: Date, default: Date.now }, // Default to current date
+  status: { type: String, default: 'Pending' },
+  motivationLetter: { type: String },
 });
 
 

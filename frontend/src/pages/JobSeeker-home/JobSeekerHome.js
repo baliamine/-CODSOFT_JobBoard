@@ -1,7 +1,8 @@
 // JobSeekerHome.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import JobSeekerOfferDetails from "../../components/JobSeekerOfferDetails.js/index";
-import "./index.css"
+import "./JobSeekerHome.css";
+import Navbar from "../../components/Navbar";
 
 const JobSeekerHome = () => {
   const [offers, setOffers] = useState([]);
@@ -18,14 +19,17 @@ const JobSeekerHome = () => {
   }, []);
 
   return (
-    <div className="jobseeker-home">
-      <h1 className='title-home-section'>Available Job Offers</h1>
-      <div className="offers-list">
-        {offers.map((offer) => (
-          <JobSeekerOfferDetails key={offer._id} offer={offer} />
-        ))}
+    <>
+      <Navbar />
+      <div className="jobseeker-home">
+        <h1 className="title-home-section">Available Job Offers</h1>
+        <div className="offers-list">
+          {offers.map((offer) => (
+            <JobSeekerOfferDetails key={offer._id} offer={offer} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

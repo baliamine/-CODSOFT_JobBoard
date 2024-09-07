@@ -3,7 +3,7 @@ import OfferDetails from "../../components/OfferDetails/index";
 import OfferForm from "../../components/OfferForm/index";
 import UseOfferContext from "../../hooks/UseOfferContext";
 import Navbar from "../../components/Navbar";
-import "../Home/home.css"
+import "./EmployerHome.css"
 
 const Home = () => {
   const { offers, dispatch } = UseOfferContext();

@@ -1,5 +1,7 @@
 /* navbar.css */
-
+*{
+  font-family: Arial, sans-serif;
+}
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -9,9 +11,8 @@
     top: 0;
     left: 0;
     right: 0;
+    border-bottom: 1px solid #e1e1e1;
   
-   
-
 
   }
   

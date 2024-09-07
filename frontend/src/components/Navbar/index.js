@@ -9,12 +9,12 @@ function Navbar() {
         <Link to="/">JobBoard</Link>
       </div>
       <ul className="navbar-content">
-        <li>
-          <Link to="/employer-profile" className="link">
-            My Profile
-          </Link>
-        </li>
-        <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="none" />
+        <Link to="/employer-profile" className="link">
+          <img
+            src="https://randomuser.me/api/portraits/men/52.jpg"
+            alt="none"
+          />
+        </Link>
       </ul>
     </nav>
   );

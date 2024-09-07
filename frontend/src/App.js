@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages//Home/Home";
-import EmployerProfile from './pages/Employer-profile/EmployerProfile';
+import EmployerHome from "./pages/Employer-home/EmployerHome";
+import EmployerProfile from "./pages/Employer-profile/EmployerProfile";
 import JobSeekerProfile from "./pages/JobSeeker-profile/JobSeekerProfile";
-import  JobSeekerHome from "./pages/homeJobSeeker/index";
-
-
+import JobSeekerHome from "./pages/JobSeeker-home/JobSeekerHome";
+import JobDetails from "./pages/JobDetails/JobDetails";
 
 function App() {
   return (
@@ -12,12 +11,11 @@ function App() {
       <BrowserRouter>
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/employer-profile" element={<EmployerProfile/>} /> 
-            <Route path="/JobSeeker-profile" element={<JobSeekerProfile/>} />
-            <Route path="/JobSeeker-home" element={<JobSeekerHome/>} />
-            
-           
+            <Route path="/Employer-home" element={<EmployerHome />} />
+            <Route path="/employer-profile" element={<EmployerProfile />} />
+            <Route path="/JobSeeker-home" element={<JobSeekerHome />} />
+            <Route path="/JobSeeker-profile" element={<JobSeekerProfile />} />
+            <Route path="/JobDetails" element={<JobDetails />} />
           </Routes>
         </div>
       </BrowserRouter>

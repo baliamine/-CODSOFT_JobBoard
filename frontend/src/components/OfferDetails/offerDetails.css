@@ -1,5 +1,7 @@
 /* Styling for offer details */
-
+* {
+  font-family: Arial, sans-serif;
+}
 .offer-details {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -54,7 +56,9 @@
   text-align: right;
 }
 
-.offer-actions button {
+.delete-btn {
+  background-color: #d9534f; /* Bootstrap's danger red */
+  color: #fff;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -62,24 +66,44 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 10px;
+ 
 }
 
-.offer-actions button:first-child {
-  background-color: #d9534f; /* Bootstrap's danger red */
-  color: #fff;
-}
-
-.offer-actions button:first-child:hover {
+.delete-btn:hover {
   background-color: #c9302c; /* Darker red on hover */
 }
 
-.offer-actions button {
+.edit-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
   background-color: #0073b1; /* LinkedIn's primary blue */
+  color: #fff;
+  
+}
+
+.edit-btn:hover {
+  background-color: #005582; /* Darker blue on hover */
+}
+
+.see-more-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  background-color: #4a4a4a; /* Professional dark grey */
   color: #fff;
 }
 
-.offer-actions button:hover {
-  background-color: #005582; /* Darker blue on hover */
+.see-more-btn:hover {
+  background-color: #333; /* Darker grey on hover */
 }
 
 /* .popup */
@@ -184,10 +208,9 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px; 
-
+  margin-top: 20px;
 }
-.submit-btn{
+.submit-btn {
   display: flex;
   justify-content: center;
 }

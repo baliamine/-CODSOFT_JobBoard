@@ -1,3 +1,8 @@
+*{
+  font-family: Arial, sans-serif;
+}
+
+
 /* General Container Styling */
 .container-profile {
   max-width: 1100px;
