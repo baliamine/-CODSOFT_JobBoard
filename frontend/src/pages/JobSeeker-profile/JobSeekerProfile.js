@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import UseJobSeekerContext from "../../hooks/UseJobSeekerContext";
-import Navbar from "../../components/Navbar";
 import pen from "../../img/pen.png";
 import "../../pages/Employer-profile/Profile.css";
+import NavbarJobSeeker from "../../components/Navbar/NavbarJobSeeker";
 
 const JobSeekerProfile = () => {
   const idJobSeeker = "66d075786842d41103d96dd1";
@@ -74,7 +74,7 @@ const JobSeekerProfile = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarJobSeeker/>
 
       <div className="container-profile">
         <div className="profile-header">

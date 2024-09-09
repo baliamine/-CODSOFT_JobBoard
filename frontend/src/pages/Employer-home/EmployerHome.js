@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import OfferDetails from "../../components/OfferDetails/index";
 import OfferForm from "../../components/OfferForm/index";
 import UseOfferContext from "../../hooks/UseOfferContext";
-import Navbar from "../../components/Navbar";
 import "./EmployerHome.css"
+import NavbarEmployer from "../../components/Navbar/NavbarEmployer";
 
 const Home = () => {
   const { offers, dispatch } = UseOfferContext();
@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
+      <NavbarEmployer/>
 
       <div className="Home">
         <div className="offer">

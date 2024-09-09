@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function Navbar() {
+const NavbarJobSeeker=()=> {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">JobBoard</Link>
+        <Link to="/JobSeeker-home">JobBoard</Link>
       </div>
       <ul className="navbar-content">
-        <Link to="/employer-profile" className="link">
+        <Link to="/JobSeeker-profile" className="link">
           <img
-            src="https://randomuser.me/api/portraits/men/52.jpg"
+            src="https://randomuser.me/api/portraits/men/62.jpg"
             alt="none"
           />
         </Link>
@@ -20,4 +20,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarJobSeeker;

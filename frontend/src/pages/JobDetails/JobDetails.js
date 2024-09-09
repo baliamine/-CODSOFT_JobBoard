@@ -3,7 +3,7 @@ import UseEmployerContext from "../../hooks/UseEmployerContext";
 import { useLocation } from "react-router-dom";
 import "./JobDetails.css";
 import gomycode from "../../img/gomycode.png";
-import Navbar from "../../components/Navbar";
+// import Navbar from "../../components/Navbar";
 
 const JobDetails = () => {
   const { dispatch } = UseEmployerContext();
@@ -54,7 +54,7 @@ const JobDetails = () => {
 
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
     <div className="job-details-container">
       <div className="employer-section">
 

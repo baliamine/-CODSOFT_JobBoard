@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import UseEmployerContext from "../../hooks/UseEmployerContext";
 import "./Profile.css";
-import Navbar from "../../components/Navbar";
 import pen from "../../img/pen.png";
 import gps from "../../img/gps.png";
+import NavbarEmployer from "../../components/Navbar/NavbarEmployer";
 
 const EmployerProfile = () => {
   const { employers, dispatch } = UseEmployerContext();
@@ -65,7 +65,7 @@ const EmployerProfile = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarEmployer />
 
       <div className="container-profile">
         {/* Profile Header */}

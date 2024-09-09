@@ -15,20 +15,19 @@ const userSchema = new Schema({
 });
 // static signup methd
 userSchema.statics.signup = async function (email, password) {
-// validation 
-if(!email || !password) {
-  throw Error("Please provide email and password");}
+  // validation
+  if (!email || !password) {
+    throw Error("Please provide email and password");
+  }
 
-if(! validator.isEmail(email)){
-  throw Error("Invalid email");
-}
-if(! validator.isStrongPassword(password)){
-  throw Error("Password  should be strong enough");
+  if (!validator.isEmail(email)) {
+    throw Error("Invalid email");
+  }
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Password  should be strong enough");
+  }
 
-}
-
-
-  const exists = await this.findOne({ email })
+  const exists = await this.findOne({ email });
   if (exists) {
     throw Error("Email already exists");
   }
@@ -38,4 +37,22 @@ if(! validator.isStrongPassword(password)){
   return user;
 };
 
+//static login method
+
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("Please provide email and password");
+  }
+
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw Error("Invalid password");
+  }
+  return user;
+};
 module.exports = mongoose.model("User", userSchema);

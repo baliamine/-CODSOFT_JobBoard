@@ -1,5 +1,6 @@
 *{
   font-family: Arial, sans-serif;
+
 }
 
 .jobseeker-home {
@@ -16,3 +17,35 @@
    
 }
 
+
+
+
+
+/* Search Bar Styling */
+.search-bar {
+  margin: 20px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column
+  
+  ;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.no-results {
+  
+  color: #ff0000;
+  font-size: 16px;
+  margin-right: 210px;
+
+}
