@@ -18,8 +18,8 @@ const NavbarJobSeeker=()=> {
       
       <ul className="navbar-content">
       <div>
-          <Link to="/Login">Login</Link>
-          <Link to="/signup">Signup</Link>
+      <Link to="/Login" className="login">Login</Link>
+      <Link to="/signup" className="signup">Signup</Link>
         </div>
         <Link to="/JobSeeker-profile" className="link">
           <img
@@ -27,7 +27,7 @@ const NavbarJobSeeker=()=> {
             alt="none"
           />
         </Link>
-        <button onClick={handelLogout}>Log out</button>
+        <button onClick={handelLogout} className="logout">Log out</button>
       </ul>
     </nav>
   );
