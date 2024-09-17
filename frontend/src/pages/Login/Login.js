@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/UseLogin";
 import backroundImg from "../../img/backroundImg.jpg";
 import "./login.css"; // Assuming you use a separate CSS file for login
+import NavbarEmployer from "../../components/Navbar/NavbarEmployer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,11 @@ const Login = () => {
   };
 
   return (
+    <>
+      
+      <NavbarEmployer/>
     <div  className="body-auth">
+   
      <img className="background-image-Auth" src={backroundImg} alt="none" />
     <div className="auth-container">
       
@@ -51,10 +56,11 @@ const Login = () => {
           {isLoading ? "Logging in..." : "Login"}
         </button>
 
-        {error && <div className="error-msg">{error.message}</div>}
+        {error && <div className="error-msg">{error}</div>}
       </form>
     </div>
     </div>
+    </>
   );
 };
 
