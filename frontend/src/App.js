@@ -7,6 +7,7 @@ import JobDetails from "./pages/JobDetails/JobDetails";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
+import "./index.css";
 function App() {
   return (
     <div className="App">

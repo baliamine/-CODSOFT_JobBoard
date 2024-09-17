@@ -7,6 +7,7 @@ import { JobSeekerContextProvider } from "./context/JobSeekerContext";
 import { CandidatureContextProvider } from "./context/CandidatureContext";
 import { AuthContextProvider } from "./context/AuthContext";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
