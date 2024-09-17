@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/UseLogin";
+import backroundImg from "../../img/backroundImg.jpg";
 import "./login.css"; // Assuming you use a separate CSS file for login
 
 const Login = () => {
@@ -13,7 +14,12 @@ const Login = () => {
   };
 
   return (
+    <div  className="body-auth">
+     <img className="background-image-Auth" src={backroundImg} alt="none" />
     <div className="auth-container">
+      
+       
+    
       <form className="auth-form" onSubmit={handleSubmit}>
         <h3>Login to Your Account</h3>
 
@@ -47,6 +53,7 @@ const Login = () => {
 
         {error && <div className="error-msg">{error.message}</div>}
       </form>
+    </div>
     </div>
   );
 };

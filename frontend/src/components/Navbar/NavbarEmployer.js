@@ -27,6 +27,7 @@ import { useLogout } from "../../hooks/UseLogout";
             alt="none"
           />
         </Link>
+        
         <button onClick={handelLogout} className="logout">Log out</button>
       </ul>
     </nav>

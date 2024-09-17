@@ -1,12 +1,17 @@
 
 *{
     font-family: Arial, sans-serif;
+    overflow-y: auto;
+    
   }
 
+.container-home{
+  margin-top:100px;
+}
 .background-image {
   background-size: cover; /* Cover the entire section */
   background-repeat: no-repeat;
-  height: 425.9px;
+  height: 600px;
   width: 100%;
   object-fit: cover;
 }

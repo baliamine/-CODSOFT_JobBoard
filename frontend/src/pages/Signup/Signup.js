@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSignup } from "../../hooks/UseSignup";
 import "./signup.css"; // Assuming you're using a dedicated CSS file
+import backroundImg from "../../img/backroundImg.jpg";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,9 @@ const Signup = () => {
   };
 
   return (
+    <div className="body-auth">
+      <img className="background-image-Auth" src={backroundImg} alt="none" />
+ 
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h3>Create Your Account</h3>
@@ -48,6 +52,7 @@ const Signup = () => {
 
         {error && <div className="error-msg">{error}</div>}
       </form>
+    </div>
     </div>
   );
 };
