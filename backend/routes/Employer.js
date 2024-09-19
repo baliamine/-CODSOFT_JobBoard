@@ -8,6 +8,13 @@ const {
   updateEmployer,
   getAllJobsByEmployer
 } = require("../controllers/Employer");
+const Employer = require("../models/Employer");
+const requireAuth=require("../middleware/requireAuth");
+
+
+
+// require auth for Employer
+router.use(requireAuth)
 
 // Get all employers
 router.get("/all-employers", getAllEmployers);

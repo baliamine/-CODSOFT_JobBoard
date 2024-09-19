@@ -7,6 +7,12 @@ const {
   deleteCandidature,
   updateCandidature,
 } = require("../controllers/Candidature");
+const requireAuth=require("../middleware/requireAuth");
+
+
+
+// require auth for Employer
+router.use(requireAuth)
 
 // Get all candidatures
 router.get("/all-candidatures", getAllCandidatures);

@@ -3,6 +3,12 @@ const router = express.Router();
 const {
   addJobSeeker, getAllJobSeekers, getJobSeekerById, deleteJobSeeker, updateJobSeeker
 } = require("../controllers/JobSeeker");
+const requireAuth=require("../middleware/requireAuth");
+
+
+
+// require auth for Employer
+router.use(requireAuth)
 
 // Get all job seekers
 router.get("/all-jobseekers", getAllJobSeekers);

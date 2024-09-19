@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const offerJob = require("../models/OfferJob");
 const{ addOffer, getAllOffers, getOfferById, deleteOffer,updateOffer }= require("../controllers/OfferJob");
+const requireAuth=require("../middleware/requireAuth");
+
+
+
+// require auth for Employer
+router.use(requireAuth)
 
 router.get("/all-offer", getAllOffers);
 
