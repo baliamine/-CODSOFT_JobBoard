@@ -16,6 +16,7 @@ const requireAuth = async (req, res, next) => {
     req.user = await User.findOne({_id}).select('_id');
     next();
   }catch(e){
+    console.log('error', e)
     return res.status(401).json({ error: "Invalid token" });
   }
 };

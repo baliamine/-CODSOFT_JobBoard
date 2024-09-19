@@ -3,17 +3,23 @@ import { useState } from "react";
 import OfferForm from "../OfferForm/index";
 import "./offerDetails.css";
 import { useNavigate } from "react-router-dom";
+import UseAuthContext from "../../hooks/UseAuthContext";
 
 const OfferDetails = ({ offer }) => {
   const idEmployer = offer.idEmployer;
   const { dispatch } = UseOfferContext();
+  const { user } = UseAuthContext();
   const Navigate = useNavigate();
 
   const [popup, setPopup] = useState(false);
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`/api/offer/delete-offer/${offer._id}`, {
+      const response = await fetch(`/api/offer/delete-offer/${offer._id}`,{
+        headers: {
+          'Authorization': `Bearer ${user?.token}`,
+        },
+      }, {
         method: "DELETE",
       });
       const data = await response.json();

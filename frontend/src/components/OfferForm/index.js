@@ -1,10 +1,12 @@
 import { useState } from "react";
 import UseOfferContext from "../../hooks/UseOfferContext";
+import UseAuthContext from "../../hooks/UseAuthContext";
 
 
 
 const OfferForm = ({data,onClose}) => {
   const { dispatch: dispatchOffer } = UseOfferContext();
+  const { user } = UseAuthContext();
   const idEmployer = "66cb27361832cdc4bc0cef66";
 
   const [dataOffer, setDataOffer] = useState({
@@ -49,7 +51,9 @@ const OfferForm = ({data,onClose}) => {
   };
 
   const SubmitOffer = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
+    if (!user){
+     alert("Please login first");}
 
     if (validateDataOffer(dataOffer)) {
       try {
@@ -57,7 +61,11 @@ const OfferForm = ({data,onClose}) => {
         const endpoint = data
           ? `/API/offer/update-offer/${data._id}`
           : "API/offer/add-offer";
-        const response = await fetch(endpoint, {
+        const response = await fetch(endpoint,{
+          headers: {
+            'Authorization': `Bearer ${user?.token}`,
+          },
+        } ,{
           method: data ? "PATCH" : "POST",
           body: JSON.stringify(dataOffer),
           headers: {
@@ -181,6 +189,7 @@ const OfferForm = ({data,onClose}) => {
       {errors.description && <div className="error">{errors.description}</div>}
 <div className="submit-btn">
       <button type="submit">{data ? "Edit": "Add"}</button></div>
+ 
     </form>
   );
 };

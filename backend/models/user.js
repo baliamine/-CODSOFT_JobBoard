@@ -12,6 +12,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  
 });
 // static signup methd
 userSchema.statics.signup = async function (email, password) {

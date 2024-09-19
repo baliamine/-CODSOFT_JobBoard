@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
+import UseAuthContext from "./hooks/UseAuthContext";
 import EmployerHome from "./pages/Employer-home/EmployerHome";
 import EmployerProfile from "./pages/Employer-profile/EmployerProfile";
 import JobSeekerProfile from "./pages/JobSeeker-profile/JobSeekerProfile";
@@ -9,6 +10,7 @@ import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
 import "./index.css";
 function App() {
+  const { user } = UseAuthContext();
   return (
     <div className="App">
       <BrowserRouter>
