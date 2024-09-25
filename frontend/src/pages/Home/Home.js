@@ -1,9 +1,12 @@
 import "./Home.css";
 import backroundImg from "../../img/backroundImg.jpg";
+import Navbar from "../../components/Navbar/Navbar";
 
 
 const Home = () => {
   return (
+    <>
+    <Navbar />
     <div className="container-home" >
   
 
@@ -13,6 +16,7 @@ const Home = () => {
         <img className="background-image" src={backroundImg} alt="none" />
       </div>
     </div>
+    </>
   );
 };
 

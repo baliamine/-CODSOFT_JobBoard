@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import UseJobSeekerContext from "../../hooks/UseJobSeekerContext";
 import pen from "../../img/pen.png";
 import "../../pages/Employer-profile/Profile.css";
-import NavbarJobSeeker from "../../components/Navbar/NavbarJobSeeker";
+import Navbar from "../../components/Navbar/Navbar";
+import UseAuthContext from "../../hooks/UseAuthContext"; // Import the Auth context
 
 const JobSeekerProfile = () => {
-  const idJobSeeker = "66d075786842d41103d96dd1";
+
   const { dispatch } = UseJobSeekerContext();
+  const { user } = UseAuthContext(); // Use the Auth context to get the user information.
   const [popup, setPopup] = useState(false);
   const [jobseeker, setJobseeker] = useState({
     name: "",
@@ -19,12 +21,16 @@ const JobSeekerProfile = () => {
     education: [],
     experience: [],
   });
-
+  const idJobSeeker = user?.id;
   useEffect(() => {
     const fetchJobSeeker = async () => {
       try {
         const response = await fetch(
-          `/API/jobseeker/single-jobseeker/${idJobSeeker}`
+          `/API/jobseeker/single-jobseeker/${idJobSeeker}`,{
+            headers: {
+              'Authorization': `Bearer ${user?.token}`,
+            },
+          }
         );
         const data = await response.json();
 
@@ -39,7 +45,7 @@ const JobSeekerProfile = () => {
       }
     };
     fetchJobSeeker();
-  }, [dispatch]);
+  }, [dispatch,idJobSeeker,user]);
 
   const hanleUpdatejobSeeker = async (e) => {
     e.preventDefault();
@@ -74,12 +80,12 @@ const JobSeekerProfile = () => {
 
   return (
     <>
-      <NavbarJobSeeker/>
+      <Navbar/>
 
       <div className="container-profile">
         <div className="profile-header">
           <img
-            src="https://randomuser.me/api/portraits/men/62.jpg"
+            src={user.img}
             alt="Profile"
             className="profile-logo"
           />

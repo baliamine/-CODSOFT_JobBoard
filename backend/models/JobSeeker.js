@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const JobSeekerSchema = new Schema({
   name: { type: String, required: true },
+  img:{ type: String, required: true},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cv: { type: String },

@@ -34,6 +34,7 @@ const getJobSeekerById = async (req, res) => {
 const addJobSeeker = async (req, res) => {
   const {
     name,
+    img,
     email,
     password,
     cv,
@@ -48,6 +49,7 @@ const addJobSeeker = async (req, res) => {
   try {
     const jobSeeker = await JobSeeker.create({
       name,
+      img,
       email,
       password,
       cv,

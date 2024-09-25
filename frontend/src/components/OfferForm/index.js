@@ -7,7 +7,7 @@ import UseAuthContext from "../../hooks/UseAuthContext";
 const OfferForm = ({data,onClose}) => {
   const { dispatch: dispatchOffer } = UseOfferContext();
   const { user } = UseAuthContext();
-  const idEmployer = "66cb27361832cdc4bc0cef66";
+  const idEmployer = user?.id;
 
   const [dataOffer, setDataOffer] = useState({
     // : maanitha sin

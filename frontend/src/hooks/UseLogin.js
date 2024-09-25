@@ -1,38 +1,36 @@
 import { useState } from "react";
-import UseAuthContext from "./UseAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { dispatch } = UseAuthContext();
+  const navigate = useNavigate();
 
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("api/user/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
+    const json = await response.json();
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(data.error);
+      setError(json.error);
     }
 
     if (response.ok) {
-      // save the user to localStorage
-      localStorage.setItem("user", JSON.stringify(data));
-
-      // update the context
-      dispatch({ type: "LOGIN", payload: data });
-
+      // Save token and role from the response
+      localStorage.setItem("user", JSON.stringify(json)); // Save entire user object
       setIsLoading(false);
+      // Redirect based on role
+      navigate(json.role === "employer" ? "/employer-home" : "/JobSeeker-home");
     }
   };
 
-  return { login, isLoading, error };
+  return { login, error, isLoading };
 };

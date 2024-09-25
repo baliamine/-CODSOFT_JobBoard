@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./JobSeekerOfferDetails.css";
 import UseCandidatureContext from "../../hooks/UseCandidatureContext";
 import { useNavigate } from "react-router-dom";
+import UseAuthContext from "../../hooks/UseAuthContext";
 
 const JobSeekerOfferDetails = ({ offer }) => {
-  const jobSeekerId = "66d075786842d41103d96dd1";
+ const {user}=UseAuthContext();
   const idEmployer = offer.idEmployer;
   const { dispatch } = UseCandidatureContext();
   const [popup, setPopup] = useState(false);
   const [jobSeekerData, setJobSeekerData] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const Navigate = useNavigate();
+  const jobSeekerId = user?.id;
   const [candidature, setCandidature] = useState({
     jobSeeker: jobSeekerId,
     offerJob: offer._id,
@@ -22,7 +24,7 @@ const JobSeekerOfferDetails = ({ offer }) => {
     const fetchJobSeekerData = async () => {
       try {
         const response = await fetch(
-          `/API/jobseeker/single-jobseeker/${jobSeekerId}`
+          `/API/jobseeker/single-jobseeker/${jobSeekerId}`,
         );
         if (response.ok) {
           const data = await response.json();

@@ -4,20 +4,25 @@ import "./navbar.css";
 import { useLogout } from "../../hooks/UseLogout";
 import UseAuthContext from "../../hooks/UseAuthContext";
 
-const NavbarEmployer = () => {
+const Navbar = () => {
   const { logout } = useLogout();
   const { user } = UseAuthContext();
 
-  const handelLogout = () => {
+  const handleLogout = () => {
     logout();
   };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/Employer-home">JobBoard</Link>
+        <Link
+          to={user.role === "employer" ? "/Employer-home" : "/JobSeeker-home"}
+        >
+          JobBoard
+        </Link>
       </div>
       <ul className="navbar-content">
-        {!user && (
+        {!user ? (
           <div>
             <Link to="/Login" className="login">
               Login
@@ -26,18 +31,19 @@ const NavbarEmployer = () => {
               Signup
             </Link>
           </div>
-        )}
-
-        {user && (
+        ) : (
           <div>
-            <Link to="/Employer-profile" className="link">
-              <img
-                src="https://randomuser.me/api/portraits/men/52.jpg"
-                alt="none"
-              />
+            <Link
+              to={
+                user.role === "employer"
+                  ? "/Employer-profile"
+                  : "/JobSeeker-profile"
+              }
+              className="link"
+            >
+              <img src={user.img} alt="Profile" />
             </Link>
-            <span> {user.email}</span>
-            <button onClick={handelLogout} className="logout">
+            <button onClick={handleLogout} className="logout">
               Log out
             </button>
           </div>
@@ -47,4 +53,4 @@ const NavbarEmployer = () => {
   );
 };
 
-export default NavbarEmployer;
+export default Navbar;

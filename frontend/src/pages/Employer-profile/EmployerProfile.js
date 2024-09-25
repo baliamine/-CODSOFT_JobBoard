@@ -3,10 +3,12 @@ import UseEmployerContext from "../../hooks/UseEmployerContext";
 import "./Profile.css";
 import pen from "../../img/pen.png";
 import gps from "../../img/gps.png";
-import NavbarEmployer from "../../components/Navbar/NavbarEmployer";
+import Navbar from "../../components/Navbar/Navbar";
+import UseAuthContext from "../../hooks/UseAuthContext";
 
 const EmployerProfile = () => {
   const { employers, dispatch } = UseEmployerContext();
+  const { user } = UseAuthContext(); 
   const [popup, setPopup] = useState(false);
   const [employerData, setEmployerData] = useState({
     name: "",
@@ -15,12 +17,16 @@ const EmployerProfile = () => {
     bio: "",
   });
 
-  const idEmployer = "66cb27361832cdc4bc0cef66";
+  const idEmployer = user?.id;
 
   useEffect(() => {
     const fetchEmployer = async () => {
       const response = await fetch(
-        `/API/Employer/single-employer/${idEmployer}`
+        `/API/Employer/single-employer/${idEmployer}`,{
+          headers: {
+            'Authorization': `Bearer ${user?.token}`,
+          },
+        }
       );
       const data = await response.json();
 
@@ -35,7 +41,7 @@ const EmployerProfile = () => {
       }
     };
     fetchEmployer();
-  }, [dispatch]);
+  }, [dispatch,idEmployer,user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,14 +71,14 @@ const EmployerProfile = () => {
 
   return (
     <>
-      <NavbarEmployer />
+      <Navbar />
 
       <div className="container-profile">
         {/* Profile Header */}
 
         <div className="profile-header">
           <img
-            src={"https://randomuser.me/api/portraits/men/52.jpg"}
+            src={user.img}
             alt="Profile"
             className="profile-logo"
           />

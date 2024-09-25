@@ -2,19 +2,21 @@ import { useEffect } from "react";
 import OfferDetails from "../../components/OfferDetails/index";
 import OfferForm from "../../components/OfferForm/index";
 import UseOfferContext from "../../hooks/UseOfferContext";
-import "./EmployerHome.css"
-import NavbarEmployer from "../../components/Navbar/NavbarEmployer";
+import "./EmployerHome.css";
+import Navbar from "../../components/Navbar/Navbar";
 import UseAuthContext from "../../hooks/UseAuthContext";
 
 const Home = () => {
   const { offers, dispatch } = UseOfferContext();
   const { user } = UseAuthContext();
-  const idEmployer = "66cb27361832cdc4bc0cef66";
+
+  // Use the user ID as the employer ID
+  const idEmployer = user?.id; // Ensure that user.id exists in your context
 
   useEffect(() => {
     const fetchOffers = async () => {
       const response = await fetch(
-        `/API/Employer/all-jobs-byEmployer/${idEmployer}`,{
+        `/API/Employer/all-jobs-byEmployer/${idEmployer}`, {
           headers: {
             'Authorization': `Bearer ${user?.token}`,
           },
@@ -26,13 +28,14 @@ const Home = () => {
         dispatch({ type: "SET_OFFER", payload: data });
       }
     };
-    if (user){fetchOffers();}
-    
-  }, [dispatch,user]);
+    if (user && idEmployer) { // Check both user and idEmployer
+      fetchOffers();
+    }
+  }, [dispatch, user, idEmployer]); // Add idEmployer to the dependency array
 
   return (
     <div>
-      <NavbarEmployer/>
+      <Navbar />
 
       <div className="Home">
         <div className="offer">
