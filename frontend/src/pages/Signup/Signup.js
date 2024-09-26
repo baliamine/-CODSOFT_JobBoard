@@ -7,18 +7,39 @@ import Navbar from "../../components/Navbar/Navbar";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState(""); // Initially empty
+  const [role, setRole] = useState(""); // jobseeker or employer
+  const [name, setName] = useState("");
+  const [companyName, setCompanyName] = useState(""); // For Employer
+  const [bio, setBio] = useState("");
+  const [img, setImg] = useState("");
+  const [phone, setPhone] = useState(""); // For Job Seeker
+  const [address, setAddress] = useState(""); // For Job Seeker
+  const [skills, setSkills] = useState(""); // For Job Seeker
+  const [education, setEducation] = useState(""); // For Job Seeker
+  const [experience, setExperience] = useState(""); // For Job Seeker
+  
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(email, password, role);
+    const userData = {
+      email,
+      password,
+      role,
+      name,
+      img,
+      bio,
+      ...(role === "employer" && { companyName }),
+      ...(role === "jobseeker" && { phone, address, skills: skills.split(","), education: education.split(","), experience: experience.split(",") }),
+    };
+
+    await signup(userData);
   };
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="body-auth">
         <img className="background-image-Auth" src={backroundImg} alt="none" />
         <div className="signup-container">
@@ -46,6 +67,111 @@ const Signup = () => {
                 value={password}
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter your name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="img">Profile Image URL</label>
+              <input
+                id="img"
+                type="text"
+                placeholder="Enter image URL"
+                onChange={(e) => setImg(e.target.value)}
+                value={img}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="bio">Bio</label>
+              <textarea
+                id="bio"
+                placeholder="Enter your bio"
+                onChange={(e) => setBio(e.target.value)}
+                value={bio}
+              />
+            </div>
+
+            {/* Role-specific fields */}
+            {role === "employer" && (
+              <div className="form-group">
+                <label htmlFor="companyName">Company Name</label>
+                <input
+                  id="companyName"
+                  type="text"
+                  placeholder="Enter your company name"
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  value={companyName}
+                />
+              </div>
+            )}
+
+            {role === "jobseeker" && (
+              <>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    id="phone"
+                    type="text"
+                    placeholder="Enter your phone number"
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="address">Address</label>
+                  <input
+                    id="address"
+                    type="text"
+                    placeholder="Enter your address"
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="skills">Skills (comma-separated)</label>
+                  <input
+                    id="skills"
+                    type="text"
+                    placeholder="Enter your skills"
+                    onChange={(e) => setSkills(e.target.value)}
+                    value={skills}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="education">Education (comma-separated)</label>
+                  <input
+                    id="education"
+                    type="text"
+                    placeholder="Enter your education"
+                    onChange={(e) => setEducation(e.target.value)}
+                    value={education}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="experience">Experience (comma-separated)</label>
+                  <input
+                    id="experience"
+                    type="text"
+                    placeholder="Enter your experience"
+                    onChange={(e) => setExperience(e.target.value)}
+                    value={experience}
+                  />
+                </div>
+              </>
+            )}
 
             <div>
               <label>

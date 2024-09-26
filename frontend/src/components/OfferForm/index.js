@@ -60,7 +60,7 @@ const OfferForm = ({data,onClose}) => {
         // fetch yaaml consomation api (i3yt lil api )
         const endpoint = data
           ? `/API/offer/update-offer/${data._id}`
-          : "API/offer/add-offer";
+          : "/API/offer/add-offer";
         const response = await fetch(endpoint,{
           headers: {
             'Authorization': `Bearer ${user?.token}`,
@@ -72,7 +72,9 @@ const OfferForm = ({data,onClose}) => {
             "Content-Type": "application/json",
           },
         });
+       
         const json = await response.json();
+        
         // sabeb yimchi i9oulo hay il 9at3 jdida w y3lmo fil jdid kil store (rani 3mlt post or update or ..... howa sabeb ifay9 il store)
         const ACTION = data ? "UPDATE_OFFER" : "ADD_OFFER";
 

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UseAuthContext from "./UseAuthContext";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { dispatch } = UseAuthContext();
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -17,26 +19,26 @@ export const useLogin = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      // Log the response for debugging
-      const responseText = await response.text();
-      console.log("Response Text:", responseText);
+      const data = await response.json();
 
       if (!response.ok) {
-        // Handle non-OK responses (404, 500, etc.)
         setIsLoading(false);
-        setError(`Error: ${response.status} - ${response.statusText}`);
-        return;
+        setError(data.error);
       }
 
-      // If the response is OK, try parsing it as JSON
-      const json = JSON.parse(responseText);
+      if (response.ok) {
+        // save the user to localStorage
+        localStorage.setItem("user", JSON.stringify(data));
 
-      // Save token and role from the response
-      localStorage.setItem("user", JSON.stringify(json)); // Save entire user object
-      setIsLoading(false);
+        // update the context
+        dispatch({ type: "LOGIN", payload: data });
 
-      // Redirect based on role
-      navigate(json.role === "employer" ? "/employer-home" : "/JobSeeker-home");
+        setIsLoading(false);
+        // Redirect based on role
+        navigate(
+          data.role === "employer" ? "/employer-home" : "/JobSeeker-home"
+        );
+      }
     } catch (err) {
       // Catch JSON parsing errors or network errors
       setIsLoading(false);
