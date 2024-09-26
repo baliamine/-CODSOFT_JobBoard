@@ -85,12 +85,12 @@ const JobSeekerProfile = () => {
       <div className="container-profile">
         <div className="profile-header">
           <img
-            src={user.img}
+            src={user?.img}
             alt="Profile"
             className="profile-logo"
           />
           <div className="profile-info">
-            <h1 className="user-name">{jobseeker.name}</h1>
+            <h1 className="user-name">{jobseeker?.name}</h1>
           </div>
           <button onClick={() => setPopup(true)}>
             <img className="edit" src={pen} alt="none" />
@@ -99,12 +99,12 @@ const JobSeekerProfile = () => {
 
         <div className="Profile">
           <h2 className="section-title">About me</h2>
-          <p className="about-me-content">{jobseeker.bio}</p>
+          <p className="about-me-content">{jobseeker?.bio}</p>
 
           <div className="profile-section">
             <h2 className="section-title">Skills</h2>
             <ul className="about-me-content">
-              {jobseeker.skills.map((skill, index) => (
+              {jobseeker?.skills.map((skill, index) => (
                 <li key={index} className="section-list-item">
                   {skill}
                 </li>
@@ -115,7 +115,7 @@ const JobSeekerProfile = () => {
           <div className="profile-section">
             <h2 className="section-title">Education</h2>
             <ul className="about-me-content">
-              {jobseeker.education.map((edu, index) => (
+              {jobseeker?.education.map((edu, index) => (
                 <li key={index} className="section-list-item">
                   {edu}
                 </li>
@@ -126,7 +126,7 @@ const JobSeekerProfile = () => {
           <div className="profile-section">
             <h2 className="section-title">Experience</h2>
             <ul className="about-me-content">
-              {jobseeker.experience.map((exp, index) => (
+              {jobseeker?.experience.map((exp, index) => (
                 <li key={index} className="section-list-item">
                   {exp}
                 </li>

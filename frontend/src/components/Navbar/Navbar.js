@@ -15,11 +15,15 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link
-          to={user.role === "employer" ? "/Employer-home" : "/JobSeeker-home"}
-        >
-          JobBoard
-        </Link>
+        {user ? (
+          <Link
+            to={user.role === "employer" ? "/Employer-home" : "/JobSeeker-home"}
+          >
+            JobBoard
+          </Link>
+        ) : (
+          <Link to="/">JobBoard</Link> // You can change this to the desired link for unauthenticated users
+        )}
       </div>
       <ul className="navbar-content">
         {!user ? (
