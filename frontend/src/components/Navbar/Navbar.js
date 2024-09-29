@@ -7,7 +7,7 @@ import UseAuthContext from "../../hooks/UseAuthContext";
 const Navbar = () => {
   const { logout } = useLogout();
   const { user } = UseAuthContext();
-
+console.log('user', user)
   const handleLogout = () => {
     logout();
   };
@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="navbar-logo">
         {user ? (
           <Link
-            to={user.role === "employer" ? "/Employer-home" : "/JobSeeker-home"}
+            to={user.user.role === "employer" ? "/Employer-home" : "/JobSeeker-home"}
           >
             JobBoard
           </Link>
@@ -39,13 +39,13 @@ const Navbar = () => {
           <div>
             <Link
               to={
-                user.role === "employer"
+                user?.user?.role === "employer"
                   ? "/Employer-profile"
                   : "/JobSeeker-profile"
               }
               className="link"
             >
-              <img src={user.img} alt="Profile" />
+              <img src={user?.user?.img} alt="Profile" />
             </Link>
             <button onClick={handleLogout} className="logout">
               Log out

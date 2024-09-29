@@ -6,6 +6,32 @@ import Navbar from "../../components/Navbar/Navbar";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
+  // const  [dataEmployer, setDataEmployer] = useState({
+  //   email: "",
+  //   password: "",
+  //   role: "",
+  //   name: "",
+  //   bio: "",
+  //   img: "",
+  //   phone: "",
+  //   address: "",
+  //   skills: "",
+  //   education: "",
+  //   experience: "",
+  // }) 
+  // const  [dataEmployer, setDataEmployer] = useState({
+  //   email: "",
+  //   password: "",
+  //   role: "",
+  //   name: "",
+  //   bio: "",
+  //   img: "",
+  //   phone: "",
+  //   address: "",
+  //   skills: "",
+  //   education: "",
+  //   experience: "",
+  // }) 
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(""); // jobseeker or employer
   const [name, setName] = useState("");
@@ -32,11 +58,11 @@ const Signup = () => {
     if (!bio) newErrors.bio = "Bio is required";
     if (!role) newErrors.role = "Role is required";
 
-    if (role === "employer") {
+    if (role == "employer") {
       if (!companyName) newErrors.companyName = "Company name is required ";
     }
 
-    if (role === "jobseeker") {
+    if (role == "jobseeker") {
       if (!phone) newErrors.phone = "Phone number is required";
       if (!address) newErrors.address = "Address is required ";
       if (!skills) newErrors.skills = "Skills are required ";
@@ -49,31 +75,33 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateUserData()) {
-      // Validation failed, don't call signup
-      return;
+    try{
+      e.preventDefault();
+      if (!validateUserData()) {
+        return;
+      }
+      const userData = {
+        email,
+        password,
+        role,
+        name,
+        img,
+        bio,
+       ...(role === "employer" && { companyName }),
+       ...(role === "jobseeker" && {
+          phone,
+          address,
+          skills: skills,
+          education: education,
+          experience: experience,
+        }),
+      };
+      console.log('userData', userData)
+      await signup(userData);
     }
-
-    const userData = {
-      email,
-      password,
-      role,
-      name,
-      img,
-      bio,
-      ...(role === "employer" && { companyName }),
-      ...(role === "jobseeker" && {
-        phone,
-        address,
-        skills: skills.split(","),
-        education: education.split(","),
-        experience: experience.split(","),
-      }),
-    };
-
-    await signup(userData);
+    catch (error) {
+      console.log('error', error)
+    }
   };
 
   return (

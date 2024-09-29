@@ -17,8 +17,7 @@ const EmployerProfile = () => {
     bio: "",
   });
 
-  const idEmployer = user?.id;
-
+  const idEmployer = user?.user?._id;
   useEffect(() => {
     const fetchEmployer = async () => {
       const response = await fetch(
@@ -78,7 +77,7 @@ const EmployerProfile = () => {
 
         <div className="profile-header">
           <img
-            src={user.img}
+            src={user?.user?.img}
             alt="Profile"
             className="profile-logo"
           />

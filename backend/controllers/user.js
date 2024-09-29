@@ -22,12 +22,15 @@ const SignupUser = async (req, res) => {
   const { email, password, role, name, bio, img, companyName, phone, address, skills, education, experience } = req.body; // Extract all fields
 
   try {
-    let userData = { name, bio, img }; // Common data for both roles
-
-    if (role === "employer") {
+    let userData = { name, bio, img }; 
+console.log('helllllllll')
+console.log('userData', userData)
+    if (role == "employer") {
+      console.log('hello')
       // Add employer-specific data
       userData = { ...userData, companyName };
-    } else if (role === "jobseeker") {
+      console.log('userData', userData)
+    } else if (role == "jobseeker") {
       // Add job seeker-specific data
       userData = {
         ...userData,
@@ -43,11 +46,9 @@ const SignupUser = async (req, res) => {
 
     const user = await User.signup(email, password, role, userData);
 
-    // Create a token (assuming createToken is a function you've defined)
     const token = createToken(user._id);
 
-    // Return the user's role and token in the response
-    res.status(201).json({ email, token, role: user.role });
+    res.status(201).json({user: user, token: token});
   } catch (error) {
     res.status(400).json({ error: error.message }); // Handle errors with a 400 status code for bad requests
   }
