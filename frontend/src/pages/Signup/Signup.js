@@ -17,11 +17,44 @@ const Signup = () => {
   const [skills, setSkills] = useState(""); // For Job Seeker
   const [education, setEducation] = useState(""); // For Job Seeker
   const [experience, setExperience] = useState(""); // For Job Seeker
-  
+  const [errors, setErrors] = useState({});
+
   const { signup, error, isLoading } = useSignup();
+
+  // Validation function
+  const validateUserData = () => {
+    const newErrors = {};
+    
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
+    if (!name) newErrors.name = "Name is required";
+    if (!img) newErrors.img = "Image is required";
+    if (!bio) newErrors.bio = "Bio is required";
+    if (!role) newErrors.role = "Role is required";
+
+    if (role === "employer") {
+      if (!companyName) newErrors.companyName = "Company name is required ";
+    }
+
+    if (role === "jobseeker") {
+      if (!phone) newErrors.phone = "Phone number is required";
+      if (!address) newErrors.address = "Address is required ";
+      if (!skills) newErrors.skills = "Skills are required ";
+      if (!education) newErrors.education = "Education is required ";
+      if (!experience) newErrors.experience = "Experience is required ";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateUserData()) {
+      // Validation failed, don't call signup
+      return;
+    }
 
     const userData = {
       email,
@@ -31,7 +64,13 @@ const Signup = () => {
       img,
       bio,
       ...(role === "employer" && { companyName }),
-      ...(role === "jobseeker" && { phone, address, skills: skills.split(","), education: education.split(","), experience: experience.split(",") }),
+      ...(role === "jobseeker" && {
+        phone,
+        address,
+        skills: skills.split(","),
+        education: education.split(","),
+        experience: experience.split(","),
+      }),
     };
 
     await signup(userData);
@@ -46,6 +85,7 @@ const Signup = () => {
           <form className="signup-form" onSubmit={handleSubmit}>
             <h3>Create Your Account</h3>
 
+            {/* Email */}
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -55,8 +95,10 @@ const Signup = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
+              {errors.email && <span className="error-msg">{errors.email}</span>}
             </div>
 
+            {/* Password */}
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
@@ -66,8 +108,10 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
+              {errors.password && <span className="error-msg">{errors.password}</span>}
             </div>
 
+            {/* Name */}
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -77,8 +121,10 @@ const Signup = () => {
                 onChange={(e) => setName(e.target.value)}
                 value={name}
               />
+              {errors.name && <span className="error-msg">{errors.name}</span>}
             </div>
 
+            {/* Image */}
             <div className="form-group">
               <label htmlFor="img">Profile Image URL</label>
               <input
@@ -88,8 +134,10 @@ const Signup = () => {
                 onChange={(e) => setImg(e.target.value)}
                 value={img}
               />
+              {errors.img && <span className="error-msg">{errors.img}</span>}
             </div>
 
+            {/* Bio */}
             <div className="form-group">
               <label htmlFor="bio">Bio</label>
               <textarea
@@ -98,6 +146,7 @@ const Signup = () => {
                 onChange={(e) => setBio(e.target.value)}
                 value={bio}
               />
+              {errors.bio && <span className="error-msg">{errors.bio}</span>}
             </div>
 
             {/* Role-specific fields */}
@@ -111,6 +160,7 @@ const Signup = () => {
                   onChange={(e) => setCompanyName(e.target.value)}
                   value={companyName}
                 />
+                {errors.companyName && <span className="error-msg">{errors.companyName}</span>}
               </div>
             )}
 
@@ -125,6 +175,7 @@ const Signup = () => {
                     onChange={(e) => setPhone(e.target.value)}
                     value={phone}
                   />
+                  {errors.phone && <span className="error-msg">{errors.phone}</span>}
                 </div>
 
                 <div className="form-group">
@@ -136,6 +187,7 @@ const Signup = () => {
                     onChange={(e) => setAddress(e.target.value)}
                     value={address}
                   />
+                  {errors.address && <span className="error-msg">{errors.address}</span>}
                 </div>
 
                 <div className="form-group">
@@ -147,6 +199,7 @@ const Signup = () => {
                     onChange={(e) => setSkills(e.target.value)}
                     value={skills}
                   />
+                  {errors.skills && <span className="error-msg">{errors.skills}</span>}
                 </div>
 
                 <div className="form-group">
@@ -158,6 +211,7 @@ const Signup = () => {
                     onChange={(e) => setEducation(e.target.value)}
                     value={education}
                   />
+                  {errors.education && <span className="error-msg">{errors.education}</span>}
                 </div>
 
                 <div className="form-group">
@@ -169,10 +223,12 @@ const Signup = () => {
                     onChange={(e) => setExperience(e.target.value)}
                     value={experience}
                   />
+                  {errors.experience && <span className="error-msg">{errors.experience}</span>}
                 </div>
               </>
             )}
 
+            {/* Role selection */}
             <div>
               <label>
                 <input
